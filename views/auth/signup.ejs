@@ -1,0 +1,95 @@
+<%- include("./partial/header") %>
+
+<div class="text-center">
+  <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+</div>
+<form class="user" action="/auth/signup" method="POST">
+  <div class="form-group row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <input
+        type="text"
+        class="form-control form-control-user"
+        name="firstname"
+        placeholder="First Name"
+        minlength="3"
+        maxlength="50"
+        required
+      />
+    </div>
+    <div class="col-sm-6">
+      <input
+        type="text"
+        class="form-control form-control-user"
+        name="lastname"
+        placeholder="Last Name"
+        minlength="3"
+        maxlength="50"
+        required
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control form-control-user"
+      name="username"
+      placeholder="Username"
+      minlength="5"
+      maxlength="50"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input type="email" class="form-control form-control-user" name="email" placeholder="Email Address" required />
+  </div>
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control form-control-user"
+      name="password"
+      placeholder="Password"
+      minlength="5"
+      maxlength="255"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control form-control-user"
+      name="confirm"
+      placeholder="Confirm Password"
+      minlength="5"
+      maxlength="255"
+      required
+    />
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <select class="form-control form-control-option" name="role" required>
+        <option value="">Select User Role...</option>
+        <% roles.forEach((role) =>{ %>
+        <option value="<%= role %>"><%= role %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-sm-6">
+      <select class="form-control form-control-option" name="area" required>
+        <option value="">Select User Area...</option>
+        <% areas.forEach((area) =>{ %>
+        <option value="<%= area %>"><%= area %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-user btn-block">Register Account</button>
+</form>
+<hr />
+<div class="text-center">
+  <a class="small" href="/auth/forgot">Forgot Password?</a>
+</div>
+<div class="text-center">
+  <a class="small" href="/auth/signin">Already have an account? Login!</a>
+</div>
+
+<%- include("./partial/footer") %>

@@ -1,0 +1,79 @@
+<%- include ('./partial/header') %>
+
+<!-- Page Heading -->
+<!-- <h1 class="h3 mb-2 text-gray-800">Report</h1> -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <form class="form-inline" action="/orders/new" method="POST" onsubmit="myButton.disabled = true; return true;">
+      <div class="mr-sm-2 font-weight-bold text-primary">Rajkot Pending Orders</div>
+      <button type="submit" class="btn btn-success btn-icon-split btn-sm my-2 my-sm-0" name="myButton">
+        <span class="icon text-white-50"><i class="fas fa-check"></i></span><span class="text">Refresh</span>
+      </button>
+    </form>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="text-center">Order ID</th>
+            <th class="text-center">Order Type</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-left">Project Name</th>
+            <th class="text-left">Location Name</th>
+            <th class="text-right">Bandwidth</th>
+            <th class="text-center">Circuit Type</th>
+            <th class="text-center">Reason</th>
+            <th class="text-center">Agency</th>
+            <th class="text-center">Task</th>
+            <th class="text-center">Order Sub Type</th>
+            <th class="text-center">Previous Bandwidth</th>
+            <th class="text-center">Customer Name</th>
+            <th class="text-center">LC ID</th>
+            <th class="text-center">CRM ID</th>
+            <th class="text-center">End-A Station</th>
+            <th class="text-center">End-A Address</th>
+            <th class="text-center">End-B Station</th>
+            <th class="text-center">End-B Address</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% orders.forEach((order) => { %>
+          <tr>
+            <td><a href="/orders/<%= order.orderId %>/edit"><%= order.orderId %></a></td>
+            <td><%= order.orderType %></td>
+            <td><%= moment(order.date).format('YYYY/MM/DD') %></td>
+            <td><%= order.project %></td>
+            <td><%= order.location %></td>
+            <td class="text-right"><%= order.bandwidth %></td>
+            <td><%= order.cctType %></td>
+            <td><%= order.reason %></td>
+            <td><%= order.agency %></td>
+            <td>
+              <% for(task in order.task) { if(order.task.hasOwnProperty(task) && order.task[task] !== undefined && task !== '$init') { %>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="noCheckbox" <%= order.task[task] ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="noCheckbox"><%= task %></label>
+              </div>
+              <% }} %>
+            </td>
+            <td><%= order.orderSubType %></td>
+            <td><%= order.prevBandwidth %></td>
+            <td><%= order.name %></td>
+            <td><%= order.lcId %></td>
+            <td><%= order.crmId %></td>
+            <td><%= order.endAStation %></td>
+            <td><%= order.endAAddress %></td>
+            <td><%= order.endBStation %></td>
+            <td><%= order.endBAddress %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include ('./partial/footer') %>
