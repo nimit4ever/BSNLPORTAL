@@ -36,7 +36,6 @@ const isLoggedIn = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    req.flash('warning', 'You need to Login First');
     res.redirect('/auth/signin');
   }
 };
@@ -45,7 +44,7 @@ const isActiveUser = function (req, res, next) {
   if (req.user.isActive) {
     return next();
   } else {
-    req.flash('error', 'User was Inactive');
+    req.flash('error', 'User inactive kindly contact Nodel Officer');
     res.redirect('/auth/signin');
   }
 };
@@ -54,7 +53,7 @@ const isAdminUser = function (req, res, next) {
   if (req.user.role === 'ADMIN') {
     return next();
   } else {
-    req.flash('warning', 'To create new User you have Admin rights');
+    req.flash('warning', 'You have to Admin rights to do operation');
     res.redirect('/auth/signin');
   }
 };

@@ -56,8 +56,6 @@ app.use(function (req, res, next) {
 
 // Initialize Router
 app.get('/', async (req, res) => {
-  // SEED PROJECT
-
   res.redirect('/users/dashboard');
 });
 app.use('/auth', authRoute);

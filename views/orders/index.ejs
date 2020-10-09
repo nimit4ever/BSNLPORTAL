@@ -6,8 +6,8 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <form class="form-inline" action="/orders/new" method="POST" onsubmit="myButton.disabled = true; return true;">
-      <div class="mr-sm-2 font-weight-bold text-primary">Rajkot Pending Orders</div>
+    <form class="form-inline" action="/orders/new/?area=RJT" method="POST" onsubmit="myButton.disabled = true; return true;">
+      <div class="mr-sm-2 font-weight-bold text-primary">Pending Orders</div>
       <button type="submit" class="btn btn-success btn-icon-split btn-sm my-2 my-sm-0" name="myButton">
         <span class="icon text-white-50"><i class="fas fa-check"></i></span><span class="text">Refresh</span>
       </button>
@@ -48,7 +48,7 @@
             <td><%= moment(order.date).format('YYYY/MM/DD') %></td>
             <td><%= order.project %></td>
             <td><%= order.location %></td>
-            <td class="text-right"><%= order.bandwidth %></td>
+            <td><%= order.bandwidth %></td>
             <td><%= order.cctType %></td>
             <td><%= order.reason %></td>
             <td><%= order.agency %></td>

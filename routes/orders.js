@@ -7,23 +7,25 @@ const { Order, agencies, reasons } = require('../models/orders');
 
 const fetchOrders = require('../utils/orders/fetchOrders');
 const filterOrders = require('../utils/orders/filterOrders');
-const { updateTask } = require('../utils/orders/orders');
+const { updateTask, searchBuild, queryBuild } = require('../utils/orders/orders');
 const { isLoggedIn, isActiveUser } = require('../middleware/auth');
 
-router.get('/', async (req, res) => {
-  orders = await Order.find({ isActive: true });
+router.get('/', [], async (req, res) => {
+  let findObj = searchBuild(req);
+  orders = await Order.find(findObj);
   res.render('./orders/index', { orders });
 });
 
 router.post('/new', async (req, res) => {
-  const totalOrders = await fetchOrders('RJT');
+  const { findObj, area } = queryBuild(req.query);
+  const totalOrders = await fetchOrders(area);
   if (totalOrders.length === 0) {
     req.flash('error', 'Can not connect to the database');
     res.redirect('back');
   } else {
     const projects = await JSON.parse(fs.readFileSync('./project.json'));
     const orders = filterOrders(totalOrders);
-    const dbOrders = await Order.find({ isActive: true });
+    const dbOrders = await Order.find(findObj);
     const removedOrders = [];
     const newOrders = [];
 
@@ -71,7 +73,7 @@ router.post('/new', async (req, res) => {
         await dbOrder.save((err) => {
           if (err) {
             console.log(err.message);
-            req.flash('error', `Can not create Order: ${dbOrder.orderId}`);
+            req.flash('error', `Can not update Order: ${dbOrder.orderId}`);
             res.redirect('/orders');
           }
         });

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const agencies = ['', 'TRANS-1', 'TRANS-2', 'TRANS-3', 'TRANS-4', 'TRANS-5', 'KR', 'JB', 'BKT', 'RR', 'GDL', 'MRV', 'DRJ'];
 const reasons = [
-  '',
   'COMMISSIONED',
   'CANCELLED',
   'CUSTOMER END',
