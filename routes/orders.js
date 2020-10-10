@@ -7,17 +7,18 @@ const { Order, agencies, reasons } = require('../models/orders');
 
 const fetchOrders = require('../utils/orders/fetchOrders');
 const filterOrders = require('../utils/orders/filterOrders');
-const { updateTask, searchBuild, queryBuild } = require('../utils/orders/orders');
-const { isLoggedIn, isActiveUser } = require('../middleware/auth');
+const { updateTask, fetchqueryBuild, Query } = require('../utils/orders/orders');
+const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
 
-router.get('/', [], async (req, res) => {
-  let findObj = searchBuild(req);
+router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
+  const { findObj } = new Query(req);
+  console.log(findObj);
   orders = await Order.find(findObj);
   res.render('./orders/index', { orders });
 });
 
-router.post('/new', async (req, res) => {
-  const { findObj, area } = queryBuild(req.query);
+router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
+  const { findObj, area } = fetchqueryBuild(req.query);
   const totalOrders = await fetchOrders(area);
   if (totalOrders.length === 0) {
     req.flash('error', 'Can not connect to the database');
@@ -85,7 +86,7 @@ router.post('/new', async (req, res) => {
   }
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
   const order = await Order.findOne({ orderId: req.params.id });
   if (!order) {
     req.flash('error', `Can not find Order: ${req.params.id}`);
@@ -95,7 +96,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 });
 
-router.put('/:id/edit', async (req, res) => {
+router.put('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
   const order = await Order.findOneAndUpdate({ orderId: req.params.id }, req.body);
   if (!order) {
     req.flash('error', `Can not find Order: ${req.params.id}`);

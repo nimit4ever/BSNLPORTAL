@@ -1,3 +1,5 @@
+const queries = ['isActive', ''];
+
 async function updateTask(oldTasks, newTasks = { NO: undefined, NIB: undefined, LCTX: undefined, LDTX: undefined, MLLN: undefined }) {
   for (task in newTasks) {
     if (newTasks.hasOwnProperty(task)) {
@@ -16,33 +18,47 @@ async function updateTask(oldTasks, newTasks = { NO: undefined, NIB: undefined, 
   }
 }
 
-function searchBuild({ query, user }, active = true) {
-  let findObj = {};
-  console.log(Object.keys(query).length);
-  if (Object.keys(query).length) {
-    findObj = queryBuild(query, active).findObj;
-  } else {
-    let task = 'task';
+class Query {
+  constructor({ query = undefined, user = undefined }) {
+    let area = 'NONE';
+    let role = 'NONE';
+    this.findObj = {};
+
     if (user) {
-      if (!(user.role === 'NO' || user.role === 'ADMIN')) {
-        task = 'task.' + user.role;
-        findObj[task] = { $exists: true, $eq: false };
+      if (user.area && user.area.length === 3) area = user.area;
+      if (user.role) {
+        role = user.role;
       }
-      if (user.area && user.area.length === 3) {
-        findObj['$or'] = [{ endAStation: user.area }, { endBStation: user.area }];
+
+      if (query && Object.keys(query).length) {
+        if (role === 'ADMIN') {
+          if (query.area && query.area.length === 3) area = query.area;
+          if (query.role) {
+            this.findObj[`task.${query.role}`] = { $exists: true, $eq: query.task && query.task === 'COMPLETED' ? true : false };
+          }
+        } else if (role === 'NO') {
+          if (query.role) {
+            this.findObj[`task.${query.role}`] = { $exists: true, $eq: query.task && query.task === 'COMPLETED' ? true : false };
+          }
+        } else {
+          this.findObj[`task.${role}`] = { $exists: true, $eq: query.task && query.task === 'COMPLETED' ? true : false };
+        }
+      } else {
+        this.findObj[`task.${role}`] = { $exists: true, $eq: query.task && query.task === 'COMPLETED' ? true : false };
       }
     }
-    findObj['isActive'] = active;
+
+    this.findObj.isActive = query.isActive && query.isActive === 'FALSE' ? false : true;
+    this.findObj.$or = [{ endAStation: area }, { endBStation: area }];
   }
-  return findObj;
 }
 
-function queryBuild(query, active = true) {
+function fetchqueryBuild(query) {
   const area = query.area && query.area.length === 3 ? query.area : 'NONE';
   const findObj = {};
   findObj['$or'] = [{ endAStation: area }, { endBStation: area }];
-  findObj['isActive'] = active;
+  findObj['isActive'] = true;
   return { findObj, area };
 }
 
-module.exports = { updateTask, searchBuild, queryBuild };
+module.exports = { updateTask, fetchqueryBuild, Query };

@@ -58,4 +58,13 @@ const isAdminUser = function (req, res, next) {
   }
 };
 
-module.exports = { signupFormValidate, isLoggedIn, isActiveUser, isAdminUser };
+const isNodelUser = function (req, res, next) {
+  if (req.user.role === 'NO') {
+    return next();
+  } else {
+    req.flash('warning', 'You have to Nodel rights to do operation');
+    res.redirect('/auth/signin');
+  }
+};
+
+module.exports = { signupFormValidate, isLoggedIn, isActiveUser, isAdminUser, isNodelUser };
