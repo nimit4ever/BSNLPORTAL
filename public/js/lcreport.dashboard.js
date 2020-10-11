@@ -63,7 +63,7 @@ $.get('/orders/api', (orders) => {
             <span id="legend-${i}-item" style="background-color: ${chart.data.datasets[0].backgroundColor[i]}">`
       );
       if (chart.data.labels[i]) {
-        text.push(chart.data.labels[i]);
+        text.push(`${chart.data.labels[i]} : ${chart.data.datasets[0].data[i]}`);
       }
       text.push('</span></a></li>');
     }
