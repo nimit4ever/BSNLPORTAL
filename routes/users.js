@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
+
 const { User } = require('../models/users');
-const { isLoggedIn, isAdminUser } = require('../middleware/auth');
+const { Order, agencies, reasons } = require('../models/orders');
+
+const { isLoggedIn, isActiveUser } = require('../middleware/auth');
 
 // USER PROFILE
-router.get('/dashboard', [isLoggedIn], (req, res) => {
-  res.redirect('/orders');
+router.get('/dashboard', [isLoggedIn], async (req, res) => {
+  orders = await Order.find({});
+  res.render('./users/dashboard', { orders });
 });
 
 router.get('/:id', function (req, res) {

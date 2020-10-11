@@ -5,15 +5,15 @@ const fs = require('fs');
 
 function addTask(fOrder, task) {
   if (task.search('_NO') !== -1) {
-    fOrder.task.NO = false;
+    fOrder.NO = false;
   } else if (task.search('_LCNIB') !== -1) {
-    fOrder.task.NIB = false;
+    fOrder.NIB = false;
   } else if (task.search('_LCTX') !== -1) {
-    fOrder.task.LCTX = false;
+    fOrder.LCTX = false;
   } else if (task.search('_LDTX') !== -1) {
-    fOrder.task.LDTX = false;
+    fOrder.LDTX = false;
   } else if (task.search('_LCMLLN') !== -1) {
-    fOrder.task.MLLN = false;
+    fOrder.MLLN = false;
   }
 }
 
@@ -36,13 +36,6 @@ module.exports = (orders) => {
       fOrder.date = new Date(order.ORDER_DATE);
       fOrder.bandwidth = order.CURRENT_BANDWIDTH;
       fOrder.cctType = order.CIRCUIT_TYPE.split(' ')[0];
-      fOrder.task = {
-        NO: undefined,
-        NIB: undefined,
-        LCTX: undefined,
-        LDTX: undefined,
-        MLLN: undefined,
-      };
       if (order.PREV_BANDWIDTH === 'null') {
         fOrder.prevBandwidth = '';
       } else {
@@ -62,7 +55,6 @@ module.exports = (orders) => {
         fOrder.endBStation = order.ENDB_SSA;
         fOrder.endBAddress = order.ADDRESS_BEND;
       }
-
       totalOrders.push(fOrder);
     }
     addTask(fOrder, order.WRG);

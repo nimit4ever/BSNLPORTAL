@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const agencies = ['', 'TRANS-1', 'TRANS-2', 'TRANS-3', 'TRANS-4', 'TRANS-5', 'KR', 'JB', 'BKT', 'RR', 'GDL', 'MRV', 'DRJ'];
+const agencies = ['NOT ASSIGN', 'TRANS-1', 'TRANS-2', 'TRANS-3', 'TRANS-4', 'TRANS-5', 'KR', 'JB', 'BKT', 'RR', 'GDL', 'MRV', 'DRJ'];
 const reasons = [
+  'NOT ASSIGN',
   'COMMISSIONED',
   'CANCELLED',
   'CUSTOMER END',
@@ -23,50 +24,16 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const OrderSchema = new mongoose.Schema({
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
-  name: {
-    type: String,
-    uppercase: true,
-    require: true,
-  },
-  project: {
-    type: String,
-    uppercase: true,
-    require: true,
-  },
-  orderId: {
-    type: Number,
-    uppercase: true,
-    require: true,
-  },
-  crmId: {
-    type: Number,
-    default: 0,
-  },
-  lcId: {
-    type: Number,
-    default: 0,
-  },
-  orderType: {
-    type: String,
-    uppercase: true,
-    require: true,
-  },
-  orderSubType: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  date: {
-    type: Date,
-    require: true,
-  },
-  compDate: {
-    type: Date,
-  },
+  isActive: { type: Boolean, default: true },
+  name: { type: String, uppercase: true, require: true },
+  project: { type: String, uppercase: true, require: true },
+  orderId: { type: Number, uppercase: true, require: true },
+  crmId: { type: Number, default: 0 },
+  lcId: { type: Number, default: 0 },
+  orderType: { type: String, uppercase: true, require: true },
+  orderSubType: { type: String, uppercase: true, default: '' },
+  date: { type: Date, require: true },
+  compDate: { type: Date },
   task: {
     NO: { type: Boolean },
     MLLN: { type: Boolean },
@@ -74,63 +41,22 @@ const OrderSchema = new mongoose.Schema({
     LDTX: { type: Boolean },
     NIB: { type: Boolean },
   },
-  bandwidth: {
-    type: String,
-    uppercase: true,
-    require: true,
-  },
-  prevBandwidth: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  cctType: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  endAStation: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  endAAddress: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  endBStation: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  endBAddress: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  location: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
-  agency: {
-    type: String,
-    uppercase: true,
-    enum: agencies,
-    default: '',
-  },
-  reason: {
-    type: String,
-    uppercase: true,
-    enum: reasons,
-    default: '',
-  },
-  remark: {
-    type: String,
-    uppercase: true,
-    default: '',
-  },
+  NO: { type: Boolean },
+  MLLN: { type: Boolean },
+  LCTX: { type: Boolean },
+  LDTX: { type: Boolean },
+  NIB: { type: Boolean },
+  bandwidth: { type: String, uppercase: true, require: true },
+  prevBandwidth: { type: String, uppercase: true, default: '' },
+  cctType: { type: String, uppercase: true, default: '' },
+  endAStation: { type: String, uppercase: true, default: '' },
+  endAAddress: { type: String, uppercase: true, default: '' },
+  endBStation: { type: String, uppercase: true, default: '' },
+  endBAddress: { type: String, uppercase: true, default: '' },
+  location: { type: String, uppercase: true, default: '' },
+  agency: { type: String, uppercase: true, enum: agencies, default: 'NOT ASSIGN' },
+  reason: { type: String, uppercase: true, enum: reasons, default: 'NOT ASSIGN' },
+  remark: { type: String, uppercase: true, default: '' },
 });
 
 const Order = mongoose.model('Order', OrderSchema);

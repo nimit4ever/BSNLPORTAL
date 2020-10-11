@@ -14,9 +14,8 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/lcreport.css" rel="stylesheet" />
+    <link href="/css/mycss.css" rel="stylesheet" />
 
-    <!-- Custom styles for Data Table -->
-    <link rel="stylesheet" href="/vendor/datatables/datatables.min.css" />
   </head>
 
   <body id="page-top">
@@ -66,9 +65,9 @@
           <div id="pendingOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <% if(currentUser.role) { %>
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=1"><%= currentUser.role %> Pending Order</a>
-              <% } %> <% if(currentUser.area && currentUser.role ==='NO') { %>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=1">All Pending Order</a>
+              <a class="collapse-item" href="/orders"><%= currentUser.role %> Pending Order</a>
+              <% } %> <% if(currentUser.area && (currentUser.role === 'ADMIN' || currentUser.role ==='NO')) { %>
+              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>">All Pending Order</a>
               <% } %>
             </div>
           </div>
@@ -90,9 +89,11 @@
           <div id="completeOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <% if(currentUser.role) { %>
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=0"><%= currentUser.role %> Completed Order</a>
+              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=FALSE"
+                ><%= currentUser.role %> Completed Order</a
+              >
               <% } %> <% if(currentUser.area && (currentUser.role === 'ADMIN' || currentUser.role ==='NO')) { %>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=0">All Completed Order</a>
+              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=FALSE">All Completed Order</a>
               <% } %>
             </div>
           </div>
@@ -252,6 +253,4 @@
           <!-- End of Topbar -->
 
           <!-- Begin Page Content -->
-          <div class="container-fluid">
-            
-            <%- include('../../flash') %>
+          <div class="container-fluid"><%- include('../../flash') %>

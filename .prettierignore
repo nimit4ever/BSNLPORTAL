@@ -1,2 +1,3 @@
 /views/auth/partial/header.ejs
 /views/orders/partial/header.ejs
+/views/users/partial/header.ejs

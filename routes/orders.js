@@ -11,10 +11,17 @@ const { updateTask, fetchqueryBuild, Query } = require('../utils/orders/orders')
 const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
 
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
-  const { findObj } = new Query(req);
+  const findObj = new Query(req);
   console.log(findObj);
   orders = await Order.find(findObj);
   res.render('./orders/index', { orders });
+});
+
+router.get('/api', [isLoggedIn, isActiveUser], async (req, res) => {
+  const findObj = new Query(req);
+  console.log(findObj);
+  orders = await Order.find(findObj);
+  res.json(orders);
 });
 
 router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
@@ -51,7 +58,7 @@ router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) =>
           }
         });
       } else {
-        updateTask(foundOrder.task, order.task);
+        updateTask(foundOrder, order);
         await foundOrder.save((err) => {
           if (err) {
             console.log(err.message);
@@ -69,7 +76,7 @@ router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) =>
 
       if (!foundOrder) {
         dbOrder.compDate = new Date();
-        updateTask(dbOrder.task);
+        updateTask(dbOrder);
         dbOrder.isActive = false;
         await dbOrder.save((err) => {
           if (err) {

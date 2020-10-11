@@ -54,12 +54,32 @@
             <td><%= order.reason %></td>
             <td><%= order.agency %></td>
             <td>
-              <% for(task in order.task) { if(order.task.hasOwnProperty(task) && order.task[task] !== undefined && task !== '$init') { %>
+              <% if(order.NO !== undefined) { %>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="noCheckbox" <%= order.task[task] ? "checked" : "" %> disabled />
-                <label class="form-check-label" for="noCheckbox"><%= task %></label>
+                <input class="form-check-input" type="checkbox" id="NO" <%= order.NO ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="NO">NO</label>
               </div>
-              <% }} %>
+              <% } %> <% if(order.NIB !== undefined) { %>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="NIB" <%= order.NIB ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="NIB">NIB</label>
+              </div>
+              <% } %> <% if(order.MLLN !== undefined) { %>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="MLLN" <%= order.MLLN ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="MLLN">MLLN</label>
+              </div>
+              <% } %> <% if(order.LCTX !== undefined) { %>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="LCTX" <%= order.LCTX ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="LCTX">LCTX</label>
+              </div>
+              <% } %> <% if(order.LDTX !== undefined) { %>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="LDTX" <%= order.LDTX ? "checked" : "" %> disabled />
+                <label class="form-check-label" for="LDTX">LDTX</label>
+              </div>
+              <% } %>
             </td>
             <td><%= order.orderSubType %></td>
             <td><%= order.prevBandwidth %></td>
