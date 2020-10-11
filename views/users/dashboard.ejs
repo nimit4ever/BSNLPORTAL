@@ -102,6 +102,7 @@
         <div class="chart-pie pt-4 pb-2">
           <canvas id="orderTypeChart"></canvas>
         </div>
+        <div class="mt-4 text-center small legend" id="orderTypeChartLegend"></div>
       </div>
     </div>
   </div>
@@ -118,6 +119,7 @@
         <div class="chart-pie pt-4 pb-2">
           <canvas id="agencyChart"></canvas>
         </div>
+        <div class="mt-4 text-center small legend" id="agencyChartLegend"></div>
       </div>
     </div>
   </div>
@@ -134,6 +136,7 @@
         <div class="chart-pie pt-4 pb-2">
           <canvas id="reasonChart"></canvas>
         </div>
+        <div class="mt-4 text-center small legend" id="reasonChartLegend"></div>
       </div>
     </div>
   </div>
@@ -142,3 +145,5 @@
 <!-- /.container-fluid -->
 
 <% } %> <%- include ('./partial/footer') %>
+
+<li><a href="${window.location.origin}/orders?orderType=${label}&isActive=1"></a></li>

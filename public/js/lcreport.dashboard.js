@@ -32,6 +32,45 @@ $.get('/orders/api', (orders) => {
     '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = '#858796';
 
+  // Colors for Legend
+  colors = [
+    '#1cc88a',
+    '#e74a3b',
+    '#4e73df',
+    '#f6c23e',
+    '#858796',
+    '#aa66cc',
+    '#3F729B',
+    '#afb42b',
+    '#6d4c41',
+    '#455a64',
+    '#e91e63',
+    '#1cc88a',
+    '#e74a3b',
+    '#4e73df',
+    '#f6c23e',
+    '#858796',
+  ];
+
+  // Legend Callback Function
+  function legendCallbackFunction(chart) {
+    const text = [];
+    text.push('<ul class="' + chart.id + '-legend">');
+    for (let i = 0; i < chart.data.datasets[0].data.length; i++) {
+      text.push(
+        `<li>
+          <a class="mya" href="${window.location.origin}/orders?${chart.canvas.id.slice(0, -5)}=${chart.data.labels[i]}&isActive=1">
+            <span id="legend-${i}-item" style="background-color: ${chart.data.datasets[0].backgroundColor[i]}">`
+      );
+      if (chart.data.labels[i]) {
+        text.push(chart.data.labels[i]);
+      }
+      text.push('</span></a></li>');
+    }
+    text.push('</ul>');
+    return text.join('');
+  }
+
   // Order Type wise Chart Start
   const orderType = orders.reduce((tally, order) => {
     if (order.isActive) tally[order.orderType] = (tally[order.orderType] || 0) + 1;
@@ -50,7 +89,7 @@ $.get('/orders/api', (orders) => {
       datasets: [
         {
           data: orderTypeValue,
-          backgroundColor: ['#1cc88a', '#e74a3b', '#4e73df', '#f6c23e', '#858796', '#36b9cc'],
+          backgroundColor: colors,
         },
       ],
     },
@@ -67,13 +106,13 @@ $.get('/orders/api', (orders) => {
         caretPadding: 10,
       },
       legend: {
-        display: true,
-        position: 'bottom',
+        display: false,
       },
+      legendCallback: legendCallbackFunction,
       cutoutPercentage: 75,
     },
   });
-
+  document.getElementById('orderTypeChartLegend').innerHTML = orderTypeChart.generateLegend();
   document.getElementById('orderTypeChart').onclick = function (evt) {
     const activePoints = orderTypeChart.getElementsAtEventForMode(evt, 'point', orderTypeChart.options);
     const firstPoint = activePoints[0];
@@ -100,20 +139,7 @@ $.get('/orders/api', (orders) => {
       datasets: [
         {
           data: agencyValue,
-          backgroundColor: [
-            '#1cc88a',
-            '#e74a3b',
-            '#4e73df',
-            '#f6c23e',
-            '#858796',
-            '#36b9cc',
-            '#1cc88a',
-            '#e74a3b',
-            '#4e73df',
-            '#f6c23e',
-            '#858796',
-            '#36b9cc',
-          ],
+          backgroundColor: colors,
         },
       ],
     },
@@ -130,13 +156,13 @@ $.get('/orders/api', (orders) => {
         caretPadding: 10,
       },
       legend: {
-        display: true,
-        position: 'bottom',
+        display: false,
       },
+      legendCallback: legendCallbackFunction,
       cutoutPercentage: 75,
     },
   });
-
+  document.getElementById('agencyChartLegend').innerHTML = agencyChart.generateLegend();
   document.getElementById('agencyChart').onclick = function (evt) {
     const activePoints = agencyChart.getElementsAtEventForMode(evt, 'point', agencyChart.options);
     const firstPoint = activePoints[0];
@@ -163,20 +189,7 @@ $.get('/orders/api', (orders) => {
       datasets: [
         {
           data: reasonValue,
-          backgroundColor: [
-            '#1cc88a',
-            '#e74a3b',
-            '#4e73df',
-            '#f6c23e',
-            '#858796',
-            '#36b9cc',
-            '#1cc88a',
-            '#e74a3b',
-            '#4e73df',
-            '#f6c23e',
-            '#858796',
-            '#36b9cc',
-          ],
+          backgroundColor: colors,
         },
       ],
     },
@@ -193,13 +206,13 @@ $.get('/orders/api', (orders) => {
         caretPadding: 10,
       },
       legend: {
-        display: true,
-        position: 'bottom',
+        display: false,
       },
+      legendCallback: legendCallbackFunction,
       cutoutPercentage: 75,
     },
   });
-
+  document.getElementById('reasonChartLegend').innerHTML = reasonChart.generateLegend();
   document.getElementById('reasonChart').onclick = function (evt) {
     const activePoints = reasonChart.getElementsAtEventForMode(evt, 'point', reasonChart.options);
     const firstPoint = activePoints[0];

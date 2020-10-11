@@ -1,3 +1,44 @@
 .mya:hover {
   text-decoration: none;
 }
+
+.legend {
+  height: 62px;
+}
+
+.legend {
+  width: 100%;
+}
+
+.legend > ul {
+  padding: 0;
+  text-align: center;
+}
+
+.legend {
+  width: 100%;
+  bottom: 10%;
+}
+.legend li {
+  cursor: pointer;
+  margin: 4px 3px;
+  display: inline-table;
+}
+
+.legend li span {
+  position: relative;
+  padding: 3px 10px;
+  border-radius: 13px;
+  color: white;
+  z-index: 2;
+  font-size: 11px;
+}
+
+.legend {
+  height: 62px;
+  overflow-y: auto;
+}
+
+.donut-area {
+  height: calc(100% - 62px);
+}
