@@ -1,4 +1,21 @@
-const queries = ['isActive', ''];
+const fs = require('fs');
+const schedule = require('node-schedule');
+
+const { Order } = require('../../models/orders');
+
+const fetchOrders = require('./fetchOrders');
+const filterOrders = require('./filterOrders');
+
+// Helper Function
+const rule = new schedule.RecurrenceRule();
+rule.hour = [new schedule.Range(10, 18)];
+rule.minute = 0;
+
+try {
+  const j = schedule.scheduleJob(rule, fetchAreaOrder);
+} catch (err) {
+  console.log(err.message);
+}
 
 async function updateTask(oldTasks, newTasks = {}) {
   if (newTasks.NO === undefined) {
@@ -29,6 +46,62 @@ async function updateTask(oldTasks, newTasks = {}) {
     if (oldTasks.LDTX === false) oldTasks.LDTX = true;
   } else {
     oldTasks.LDTX = false;
+  }
+}
+
+async function fetchAreaOrder(area = 'RJT') {
+  const findObj = { $or: [{ endAStation: area }, { endBStation: area }], isActive: true };
+  const totalOrders = await fetchOrders(area);
+  if (totalOrders.length === 0) {
+    throw new Error('Can not connect to the database');
+  } else {
+    const projects = await JSON.parse(fs.readFileSync('./project.json'));
+    const orders = filterOrders(totalOrders);
+    const dbOrders = await Order.find(findObj);
+
+    for (order of orders) {
+      const foundOrder = await Order.findOne({ orderId: order.orderId });
+      if (!foundOrder) {
+        const project = projects.find((project) => {
+          return order.name.toUpperCase().search(project.key.toUpperCase()) !== -1;
+        });
+        if (!project) {
+          order.project = order.name;
+        } else {
+          order.project = project.value;
+        }
+        await Order.create(order, (err, newOrder) => {
+          if (err) {
+            throw err;
+          }
+        });
+      } else {
+        updateTask(foundOrder, order);
+        await foundOrder.save((err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      }
+    }
+
+    for (dbOrder of dbOrders) {
+      const foundOrder = orders.find((order) => {
+        return dbOrder.orderId === order.orderId;
+      });
+
+      if (!foundOrder) {
+        dbOrder.compDate = new Date();
+        updateTask(dbOrder);
+        dbOrder.isActive = false;
+        await dbOrder.save((err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      }
+    }
+    console.log(`${area} Database Updated Successfully at ${new Date()}`);
   }
 }
 
@@ -66,12 +139,4 @@ class Query {
   }
 }
 
-function fetchqueryBuild(query) {
-  const area = query.area && query.area.length === 3 ? query.area : 'NONE';
-  const findObj = {};
-  findObj['$or'] = [{ endAStation: area }, { endBStation: area }];
-  findObj['isActive'] = true;
-  return { findObj, area };
-}
-
-module.exports = { updateTask, fetchqueryBuild, Query };
+module.exports = { fetchAreaOrder, Query };
