@@ -49,7 +49,8 @@ async function updateTask(oldTasks, newTasks = {}) {
   }
 }
 
-async function fetchAreaOrder(area = 'RJT') {
+async function fetchAreaOrder(area) {
+  area = 'RJT';
   const findObj = { $or: [{ endAStation: area }, { endBStation: area }], isActive: true };
   const totalOrders = await fetchOrders(area);
   if (totalOrders.length === 0) {
