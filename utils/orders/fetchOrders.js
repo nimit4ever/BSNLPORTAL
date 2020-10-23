@@ -37,15 +37,19 @@ module.exports = async (area) => {
         data: data,
       };
 
-      await axios(configPost).then(function (response) {
-        const rowdata = new htmlTableToJson(response.data);
+      await axios(configPost)
+        .then(function (response) {
+          const rowdata = new htmlTableToJson(response.data);
 
-        for (order of rowdata._results[0]) {
-          if (order.SERVICE_TYPE === 'LEASED_LINE' && (order.ENDA_SSA === area || order.ENDB_SSA === area)) {
-            totalOrder.push(order);
+          for (order of rowdata._results[0]) {
+            if (order.SERVICE_TYPE === 'LEASED_LINE' && (order.ENDA_SSA === area || order.ENDB_SSA === area)) {
+              totalOrder.push(order);
+            }
           }
-        }
-      });
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
     })
     .catch(function (error) {
       console.log(error.message);

@@ -54,7 +54,7 @@ async function fetchAreaOrder(area) {
   const findObj = { $or: [{ endAStation: area }, { endBStation: area }], isActive: true };
   const totalOrders = await fetchOrders(area);
   if (totalOrders.length === 0) {
-    throw new Error('Can not connect to the database');
+    console.log('Can not connect to the database');
   } else {
     const projects = await JSON.parse(fs.readFileSync('./project.json'));
     const orders = filterOrders(totalOrders);
@@ -73,14 +73,14 @@ async function fetchAreaOrder(area) {
         }
         await Order.create(order, (err, newOrder) => {
           if (err) {
-            throw err;
+            console.log(err.message);
           }
         });
       } else {
         updateTask(foundOrder, order);
         await foundOrder.save((err) => {
           if (err) {
-            throw err;
+            console.log(err.message);
           }
         });
       }
@@ -97,7 +97,7 @@ async function fetchAreaOrder(area) {
         dbOrder.isActive = false;
         await dbOrder.save((err) => {
           if (err) {
-            throw err;
+            console.log(err.message);
           }
         });
       }
