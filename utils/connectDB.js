@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
-const DATABASEURL = process.env.DATABASEURL;
+const InitiateMongoServer = async (local) => {
+  let DATABASEURL = '';
+  if (local) {
+    DATABASEURL = 'mongodb://localhost:27017/lcreport';
+  } else {
+    DATABASEURL = process.env.DATABASEURL;
+  }
 
-const InitiateMongoServer = async () => {
   try {
     await mongoose.connect(DATABASEURL, {
       useNewUrlParser: true,

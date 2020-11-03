@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const LocalStrategy = require('passport-local');
+const execFile = require('child_process').execFile;
 const path = require('path');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
@@ -19,7 +20,14 @@ const ordersRoute = require('./routes/orders');
 
 // Connect to the Database
 const InitiateMongoServer = require('./utils/connectDB');
-InitiateMongoServer();
+execFile('C:/Program Files/MongoDB/Server/4.4/bin/mongod.exe', ['--version'], async (error, stdout, stderr) => {
+  if (error) {
+    console.log(error.message);
+    await InitiateMongoServer(false);
+  } else {
+    await InitiateMongoServer(true);
+  }
+});
 
 // Initialize all Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
