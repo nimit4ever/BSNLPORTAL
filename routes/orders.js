@@ -7,6 +7,8 @@ const { Order, agencies, reasons } = require('../models/orders');
 const { fetchAreaOrder, Query } = require('../utils/orders/orders');
 const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
 
+let referer = '';
+
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
   const findObj = new Query(req);
   orders = await Order.find(findObj);
@@ -36,27 +38,29 @@ router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res
   const order = await Order.findOne({ orderId: req.params.id });
   if (!order) {
     req.flash('error', `Can not find Order: ${req.params.id}`);
-    res.redirect('/orders');
+    res.redirect('back');
   } else {
+    referer = req.headers.referer.split(':3000')[1];
     res.render('./orders/edit', { order, agencies, reasons });
   }
 });
 
 router.put('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
   const order = await Order.findOneAndUpdate({ orderId: req.params.id }, req.body);
+  console.log(req.body);
   if (!order) {
     req.flash('error', `Can not find Order: ${req.params.id}`);
-    res.redirect('/orders');
+    res.redirect(referer);
   } else {
     await order.save((err) => {
       if (err) {
         console.log(err.message);
         req.flash('error', `Can not update Order: ${req.params.id}`);
-        res.redirect('/orders');
+        res.redirect(referer);
       }
     });
     req.flash('success', `${req.params.id} :  Saved Successfully`);
-    res.redirect('/orders');
+    res.redirect(referer);
   }
 });
 
