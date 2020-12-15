@@ -17,6 +17,9 @@ const { User } = require('./models/users');
 const authRoute = require('./routes/auth');
 const usersRoute = require('./routes/users');
 const ordersRoute = require('./routes/orders');
+const feasibilitiesRoute = require('./routes/feasibilities');
+const unitsRoute = require('./routes/units');
+const itemsRoute = require('./routes/items');
 
 // Connect to the Database
 const InitiateMongoServer = require('./utils/connectDB');
@@ -25,7 +28,7 @@ execFile('C:/Program Files/MongoDB/Server/4.4/bin/mongod.exe', ['--version'], as
     console.log(error.message);
     await InitiateMongoServer(false);
   } else {
-    await InitiateMongoServer(true);
+    await InitiateMongoServer(false); // true
   }
 });
 
@@ -69,6 +72,9 @@ app.get('/', async (req, res) => {
 app.use('/auth', authRoute);
 app.use('/users', usersRoute);
 app.use('/orders', ordersRoute);
+app.use('/feasibilities', feasibilitiesRoute);
+app.use('/units', unitsRoute);
+app.use('/feasibilities/:id/items', itemsRoute);
 
 app.get('*', (req, res) => {
   res.render('./auth/404');

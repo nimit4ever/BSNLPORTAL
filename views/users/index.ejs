@@ -1,0 +1,62 @@
+<%- include ('../partial/header') %>
+
+<!-- Page Heading -->
+<!-- <h1 class="h3 mb-2 text-gray-800">Report</h1> -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="mr-sm-2 font-weight-bold text-primary">Total <%= users.length %> Users Found</div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Username</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Role</th>
+            <th class="text-center">Area</th>
+            <th class="text-center">Active</th>
+            <th class="text-center">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users.forEach((user) => { %>
+          <tr>
+            <td><a href="/users/<%= user._id %>/edit"> <%= `${user.firstname} ${user.lastname}` %> </a></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td class="text-center"><%= user.area %></td>
+            <td class="text-center"><%= user.isActive ? "ACTIVE" : "INACTIVE" %></td>
+            <td class="text-center">
+              <form
+                class="list-inline-item"
+                action="/users/<%= user._id %>?_method=DELETE"
+                method="POST"
+                onsubmit="mySubmit.disabled = true; return true;"
+              >
+                <button class="btn btn-danger btn-sm btn-icon-split" type="submit" name="mySubmit">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                  <span class="text">Delete</span>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include ('../partial/footer') %>
+
+<!-- Page level custom scripts -->
+<script src="/js/lcreport.datatables.js"></script>
+
+<%- include ('../partial/footer2') %>

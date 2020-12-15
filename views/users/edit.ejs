@@ -1,0 +1,67 @@
+<%- include ('../partial/header') %>
+
+<h1 class="h3 mb-4 text-gray-800">User Edit Form</h1>
+<form action="/users/<%= user._id %>?_method=PUT" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" value="<%= user.firstname %>" name="firstname" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" value="<%= user.lastname %>" name="lastname" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" value="<%= user.username %>" name="username" disabled />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" value="<%= user.email %>" name="email" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="role">Role</label>
+      <select class="form-control form-control-option" id="role" name="role" required>
+        <option value="<%= user.role %>"><%= user.role %></option>
+        <% roles.forEach((role) =>{ %>
+        <option value="<%= role %>"><%= role %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="area">Area</label>
+      <select class="form-control form-control-option" id="area" name="area" required>
+        <option value="<%= user.area %>"><%= user.area %></option>
+        <% areas.forEach((area) =>{ %>
+        <option value="<%= area %>"><%= area %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="isActive" name="isActive" <%= user.isActive ? "checked" : "" %> />
+    <label class="form-check-label" for="isActive">Check to Active User</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Save</span>
+  </button>
+</form>
+
+<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

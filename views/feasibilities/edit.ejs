@@ -1,0 +1,99 @@
+<%- include ('../partial/header') %>
+
+<h1 class="h3 mb-4 text-gray-800">Feasibility Edit Form</h1>
+<form action="/feasibilities/<%= feasibility._id %>?_method=PUT" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Customer Name</label>
+      <input type="text" class="form-control" id="name" value="<%= feasibility.name %>" name="name" required />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" value="<%= feasibility.location %>" name="location" />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="media">Feasibility Media</label>
+      <select class="form-control form-control-option" id="media" name="media" required>
+        <option value="<%= feasibility.media %>"><%= feasibility.media %></option>
+        <option value="COPPER">COPPER</option>
+        <option value="OFC">OFC</option>
+        <option value="MOBILE">MOBILE</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="endAStation">End-A Station</label>
+      <select class="form-control form-control-option" id="endAStation" name="endAStation" required>
+        <option value="<%= feasibility.endAStation %>"><%= feasibility.endAStation %></option>
+        <% stations.forEach((station) =>{ %>
+        <option value="<%= station %>"><%= station %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="endAAddress">End-A Address</label>
+      <textarea class="form-control" id="endAAddress" name="endAAddress" rows="4"><%= feasibility.endAAddress %></textarea>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="endBStation">End-B Station</label>
+      <select class="form-control form-control-option" id="endBStation" name="endBStation">
+        <option value="<%= feasibility.endBStation %>"><%= feasibility.endBStation %></option>
+        <% stations.forEach((station) =>{ %>
+        <option value="<%= station %>"><%= station %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="endBAddress">End-B Address</label>
+      <textarea class="form-control" id="endBAddress" name="endBAddress" rows="4"><%= feasibility.endBAddress %></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="agency">Agency</label>
+      <select class="form-control form-control-option" id="agency" name="agency" required>
+        <option value="<%= feasibility.agency %>"><%= feasibility.agency %></option>
+        <% agencies.forEach((agency) =>{ %>
+        <option value="<%= agency %>"><%= agency %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="service">Service</label>
+      <select class="form-control form-control-option" id="service" name="service" required>
+        <option value="<%= feasibility.service %>"><%= feasibility.service %></option>
+        <% services.forEach((service) =>{ %>
+        <option value="<%= service %>"><%= service %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="bandwidth">Bandwidth</label>
+      <input type="text" class="form-control" id="bandwidth" value="<%= feasibility.bandwidth %>" name="bandwidth" required />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="prevBandwidth">Previous Bandwidth</label>
+      <input type="text" class="form-control" id="prevBandwidth" value="<%= feasibility.prevBandwidth %>" name="prevBandwidth" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="remark">Remark</label>
+      <input type="text" class="form-control" id="remark" value="<%= feasibility.remark %>" name="remark" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <button type="submit" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Save</span>
+      </button>
+    </div>
+  </div>
+</form>
+
+<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

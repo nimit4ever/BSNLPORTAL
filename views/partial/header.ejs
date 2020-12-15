@@ -28,13 +28,18 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/users/dashboard">
           <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fas fa-volleyball-ball"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">LC Portal <sup>+</sup></div>
+          <div class="sidebar-brand-text mx-3">BSNL Portal</div>
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0" />
+        <hr class="sidebar-divider" />
+
+        <% if(currentUser && currentUser.role) { %>
+
+        <!-- Heading -->
+        <div class="sidebar-heading">User</div>
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
@@ -44,11 +49,30 @@
           >
         </li>
 
+        <!-- Nav Item - User Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#userPage"
+            aria-expanded="true"
+            aria-controls="reportPage"
+          >
+            <i class="fas fa-user"></i>
+            <span>User</span>
+          </a>
+          <div id="userPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="/users">User</a>
+            </div>
+          </div>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
         <!-- Heading -->
-        <% if(currentUser) { %>
         <div class="sidebar-heading">Orders</div>
 
         <!-- Nav Item - Pending Order Collapse Menu -->
@@ -66,9 +90,8 @@
           </a>
           <div id="pendingOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <% if(currentUser.role) { %>
               <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=1"><%= currentUser.role %> Pending Order</a>
-              <% } %> <% if(currentUser.area && currentUser.role ==='NO') { %>
+              <% if(currentUser.area && currentUser.role ==='NO') { %>
               <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=1">All Pending Order</a>
               <% } %>
             </div>
@@ -90,9 +113,8 @@
           </a>
           <div id="completeOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <% if(currentUser.role) { %>
               <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=0"><%= currentUser.role %> Completed Order</a>
-              <% } %> <% if(currentUser.area && (currentUser.role === 'ADMIN' || currentUser.role ==='NO')) { %>
+              <% if(currentUser.area && currentUser.role ==='NO') { %>
               <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=0">All Completed Order</a>
               <% } %>
             </div>
@@ -101,70 +123,54 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
-        <% } %>
 
         <!-- Heading -->
-        <div class="sidebar-heading">Reports</div>
+        <div class="sidebar-heading">Feasibility</div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Feasibility Collapse Menu -->
         <li class="nav-item">
           <a
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#reportPage"
+            data-target="#feasibilityPage"
             aria-expanded="true"
             aria-controls="reportPage"
           >
-            <i class="fas fa-flag-checkered"></i>
-            <span>Report</span>
+            <i class="fas fa-align-justify"></i>
+            <span>Feasibility</span>
           </a>
-          <div id="reportPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div id="feasibilityPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <% if(currentUser.role) { %>
-              <a class="collapse-item" href="/orders/report">Report</a>
-              <% } %>
+              <a class="collapse-item" href="/feasibilities">Feasibility</a>
+              <a class="collapse-item" href="/feasibilities/new">New</a>
             </div>
           </div>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block" />
-
-        <% if(currentUser && currentUser.role && (currentUser.role === 'ADMIN')) { %>
-
-        <!-- Heading -->
-        <div class="sidebar-heading">Users</div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Unit Collapse Menu -->
         <li class="nav-item">
           <a
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#usersPage"
+            data-target="#unitPage"
             aria-expanded="true"
-            aria-controls="usersPage"
+            aria-controls="reportPage"
           >
-            <i class="fas fa-user-shield"></i>
-            <span>Users</span>
+            <i class="fab fa-buromobelexperte"></i>
+            <span>Unit</span>
           </a>
-          <div id="usersPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div id="unitPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Login Screens:</h6>
-              <a class="collapse-item" href="login.html">Login</a>
-              <a class="collapse-item" href="register.html">Register</a>
-              <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-              <div class="collapse-divider"></div>
-              <h6 class="collapse-header">Other Pages:</h6>
-              <a class="collapse-item" href="404.html">404 Page</a>
-              <a class="collapse-item" href="blank.html">Blank Page</a>
+              <a class="collapse-item" href="/units">Unit</a>
+              <a class="collapse-item" href="/units/new">New</a>
             </div>
           </div>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block" />
+        <hr class="sidebar-divider" />
 
         <% } %>
 
@@ -186,10 +192,10 @@
               <i class="fa fa-bars"></i>
             </button>
 
-            <% if(currentUser) { %>
+            <% if(currentUser && currentUser.role) { %>
 
             <!-- Topbar Search -->
-            <% if(currentUser.role && currentUser.role === 'NO') { %>
+            <% if(currentUser.role === 'NO') { %>
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-3 my-2 mw-100"
               action="/orders/new/?area=RJT"
@@ -205,7 +211,7 @@
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-              <% if(currentUser.role && currentUser.role === 'NO') { %>
+              <% if(currentUser.role === 'NO') { %>
               <form
                 class="nav-link d-inline-block d-sm-none form-inline my-2"
                 action="/orders/new/?area=RJT"
@@ -257,3 +263,5 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <%- include('./flash') %>
+            <!-- ******************************************************************************************************* -->
+

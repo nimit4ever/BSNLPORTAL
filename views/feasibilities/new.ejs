@@ -1,0 +1,99 @@
+<%- include ('../partial/header') %>
+
+<h1 class="h3 mb-4 text-gray-800">Feasibility Form</h1>
+<form action="/feasibilities/new" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Customer Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Customer Name" name="name" required />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" placeholder="Location" name="location" />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="media">Feasibility Media</label>
+      <select class="form-control form-control-option" id="media" name="media" required>
+        <option value="">SELECT</option>
+        <option value="COPPER">COPPER</option>
+        <option value="OFC">OFC</option>
+        <option value="MOBILE">MOBILE</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="endAStation">End-A Station</label>
+      <select class="form-control form-control-option" id="endAStation" name="endAStation" required>
+        <option value="">SELECT</option>
+        <% stations.forEach((station) =>{ %>
+        <option value="<%= station %>"><%= station %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="endAAddress">End-A Address</label>
+      <textarea class="form-control" id="endAAddress" placeholder="End-A Address" name="endAAddress" rows="4"></textarea>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="endBStation">End-B Station</label>
+      <select class="form-control form-control-option" id="endBStation" name="endBStation">
+        <option value="">SELECT</option>
+        <% stations.forEach((station) =>{ %>
+        <option value="<%= station %>"><%= station %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="endBAddress">End-B Address</label>
+      <textarea class="form-control" id="endBAddress" placeholder="End-B Address" name="endBAddress" rows="4"></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="agency">Agency</label>
+      <select class="form-control form-control-option" id="agency" name="agency">
+        <option value="">SELECT</option>
+        <% agencies.forEach((agency) =>{ %>
+        <option value="<%= agency %>"><%= agency %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="service">Service</label>
+      <select class="form-control form-control-option" id="service" name="service" required>
+        <option value="">SELECT</option>
+        <% services.forEach((service) =>{ %>
+        <option value="<%= service %>"><%= service %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="bandwidth">Bandwidth</label>
+      <input type="text" class="form-control" id="bandwidth" placeholder="Bandwidth" name="bandwidth" required />
+    </div>
+    <div class="form-group col-md-3">
+      <label for="prevBandwidth">Previous Bandwidth</label>
+      <input type="text" class="form-control" id="prevBandwidth" placeholder="Previous Bandwidth" name="prevBandwidth" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="remark">Remark</label>
+      <input type="text" class="form-control" id="remark" placeholder="Remark" name="remark" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <button type="submit" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Submit</span>
+      </button>
+    </div>
+  </div>
+</form>
+
+<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

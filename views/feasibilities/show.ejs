@@ -1,0 +1,218 @@
+<%- include ('../partial/header') %>
+
+<!-- Content Row -->
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card position-relative border-left-info">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Customer Detail</h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>In case of feasible just select Feasible 'YES' and submit</code>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="text-left">Particular</th>
+                <th class="text-left">Detail</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td><%= feasibility.name %></td>
+              </tr>
+              <tr>
+                <td>Location</td>
+                <td><%= feasibility.location %></td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td><%= feasibility.media %></td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td><%= moment(feasibility.date).format('YYYY/MM/DD') %></td>
+              </tr>
+              <% if(feasibility.compDate) { %>
+              <tr>
+                <td>Submit Date</td>
+                <td><%= moment(feasibility.compDate).format('YYYY/MM/DD') %></td>
+              </tr>
+              <% } %>
+              <tr>
+                <td>End-A Station</td>
+                <td><%= feasibility.endAStation %></td>
+              </tr>
+              <tr>
+                <td>End-A Address</td>
+                <td><%= feasibility.endAAddress %></td>
+              </tr>
+              <tr>
+                <td>End-B Station</td>
+                <td><%= feasibility.endBStation %></td>
+              </tr>
+              <tr>
+                <td>End-B Address</td>
+                <td><%= feasibility.endBAddress %></td>
+              </tr>
+              <tr>
+                <td>Agency</td>
+                <td><%= feasibility.agency %></td>
+              </tr>
+              <tr>
+                <td>Service</td>
+                <td><%= feasibility.service %></td>
+              </tr>
+              <tr>
+                <td>Bandwidth</td>
+                <td><%= feasibility.bandwidth %></td>
+              </tr>
+              <tr>
+                <td>Old Bandwidth</td>
+                <td><%= feasibility.prevBandwidth %></td>
+              </tr>
+              <tr>
+                <td>Remark</td>
+                <td><%= feasibility.remark %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="/feasibilities/<%= feasibility._id %>/edit" class="btn btn-info btn-icon-split mr-2">
+          <span class="icon text-white-50">
+            <i class="fas fa-edit"></i>
+          </span>
+          <span class="text">Modify</span>
+        </a>
+
+        <form
+          class="list-inline-item"
+          action="/feasibilities/<%= feasibility._id %>?_method=DELETE"
+          method="POST"
+          onsubmit="mySubmit.disabled = true; return true;"
+        >
+          <button class="btn btn-danger btn-icon-split" type="submit" name="mySubmit">
+            <span class="icon text-white-50">
+              <i class="fas fa-trash"></i>
+            </span>
+            <span class="text">Delete</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card position-relative border-left-warning">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Build Estimate</h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>In case of not feasible create estimate and submit</code>
+        </div>
+
+        <a href="/feasibilities/<%= feasibility._id %>/items/new" class="btn btn-secondary btn-icon-split mr-2 mb-3">
+          <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span class="text">Add Item</span>
+        </a>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="text-center" colspan="2">Particular</th>
+                <th class="text-center">Measurement</th>
+                <th class="text-center">Unit Rate</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Total</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% feasibility.itemList.forEach((list) => { %>
+              <tr>
+                <td class="text-center">
+                  <form
+                    class="list-inline-item"
+                    action="/feasibilities/<%= feasibility._id %>/items/<%= list._id %>?_method=DELETE"
+                    method="POST"
+                    onsubmit="mySubmit.disabled = true; return true;"
+                  >
+                    <button class="btn btn-danger btn-sm btn-icon-split" type="submit" name="mySubmit">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                    </button>
+                  </form>
+                </td>
+                <td class="text-left"><%= list.name %></td>
+                <td class="text-center"><%= list.measurement %></td>
+                <td class="text-right"><%= list.unitRate %></td>
+                <td class="text-right"><%= list.qty %></td>
+                <td class="text-right"><%= list.amt %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+            <thead>
+              <tr>
+                <th class="text-center" colspan="5">Total Estimate</th>
+                <th class="text-center"><%= feasibility.estimate %></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card position-relative border-left-danger mt-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Final Submit</h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>After final Submit change not possible</code>
+        </div>
+        <form class="mt-3" action="/feasibilities/<%= feasibility._id %>?_method=PUT" method="POST">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="feasible">Feasibile</label>
+              <select class="form-control form-control-option" id="feasible" name="feasible" required>
+                <option value="">SELECT</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="pop">Point of Presence</label>
+              <input type="text" class="form-control" id="pop" placeholder="Point of Presence" name="pop" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="agencyRemark">Agency Remark</label>
+              <input type="text" class="form-control" id="agencyRemark" placeholder="Agency Remark" name="agencyRemark" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Submit</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>
