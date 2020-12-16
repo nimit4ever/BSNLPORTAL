@@ -15,7 +15,8 @@
           <tr>
             <th class="text-center">Customer Name</th>
             <th class="text-left">Location Name</th>
-            <th class="text-center">Date</th>
+            <th class="text-center">Request Date</th>
+            <th class="text-center">Completion Date</th>
             <th class="text-center">Media</th>
             <th class="text-center">Service</th>
             <th class="text-right">Bandwidth</th>
@@ -29,12 +30,14 @@
           <tr>
             <td><a href="/feasibilities/<%= feasibility._id %>"> <%= feasibility.name %> </a></td>
             <td><%= feasibility.location %></td>
-            <td><%= moment(feasibility.date).format('YYYY/MM/DD') %></td>
-            <td><%= feasibility.media %></td>
-            <td><%= feasibility.service %></td>
-            <td><%= feasibility.bandwidth %></td>
-            <td><%= feasibility.feasible %></td>
-            <td><%= feasibility.agency %></td>
+            <td class="text-center"><%= moment(feasibility.date).format('YYYY/MM/DD') %></td>
+
+            <td class="text-center"><% if(feasibility.compDate){ %> <%= moment(feasibility.compDate).format('YYYY/MM/DD') %> <% } %></td>
+            <td class="text-center"><%= feasibility.media %></td>
+            <td class="text-center"><%= feasibility.service %></td>
+            <td class="text-center"><%= feasibility.bandwidth %></td>
+            <td class="text-center"><%= feasibility.feasible %></td>
+            <td class="text-center"><%= feasibility.agency %></td>
           </tr>
           <% }) %>
         </tbody>

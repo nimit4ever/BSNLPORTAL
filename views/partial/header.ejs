@@ -36,7 +36,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
-        <% if(currentUser && currentUser.role) { %>
+        <% if(currentUser && currentUser.role && currentUser.isActive === true) { %>
 
         <!-- Heading -->
         <div class="sidebar-heading">User</div>
@@ -48,8 +48,9 @@
             <span>Dashboard</span></a
           >
         </li>
-
+        
         <!-- Nav Item - User Collapse Menu -->
+        <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
         <li class="nav-item">
           <a
             class="nav-link collapsed"
@@ -68,14 +69,15 @@
             </div>
           </div>
         </li>
+        <% } %>
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
         <!-- Heading -->
-        <div class="sidebar-heading">Orders</div>
+        <div class="sidebar-heading">Order</div>
 
-        <!-- Nav Item - Pending Order Collapse Menu -->
+        <!-- Nav Item - Order Collapse Menu -->
         <li class="nav-item">
           <a
             class="nav-link collapsed"
@@ -86,36 +88,15 @@
             aria-controls="pendingOrder"
           >
             <i class="fas fa-at"></i>
-            <span>Pending Order</span>
+            <span>Order</span>
           </a>
           <div id="pendingOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=1"><%= currentUser.role %> Pending Order</a>
-              <% if(currentUser.area && currentUser.role ==='NO') { %>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=1">All Pending Order</a>
-              <% } %>
-            </div>
-          </div>
-        </li>
-
-        <!-- Nav Item - Complete Order Collapse Menu -->
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#completeOrder"
-            aria-expanded="true"
-            aria-controls="completeOrder"
-          >
-            <i class="fas fa-check-double"></i>
-            <span>Completed Order</span>
-          </a>
-          <div id="completeOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=0"><%= currentUser.role %> Completed Order</a>
-              <% if(currentUser.area && currentUser.role ==='NO') { %>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=0">All Completed Order</a>
+              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=1">My Pending</a>
+              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=0">My Completed</a>
+              <% if(currentUser.area && (currentUser.role === 'NO' || currentUser.role === 'ADMIN')) { %>
+              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=1">All Pending</a>
+              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=0">All Completed</a>
               <% } %>
             </div>
           </div>
@@ -142,8 +123,11 @@
           </a>
           <div id="feasibilityPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/feasibilities">Feasibility</a>
+              <a class="collapse-item" href="/feasibilities">Pending</a>
+              <a class="collapse-item" href="/feasibilities?pending=0">Completed</a>
+              <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
               <a class="collapse-item" href="/feasibilities/new">New</a>
+              <% } %>
             </div>
           </div>
         </li>
@@ -164,7 +148,9 @@
           <div id="unitPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="/units">Unit</a>
+              <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
               <a class="collapse-item" href="/units/new">New</a>
+              <% } %>
             </div>
           </div>
         </li>

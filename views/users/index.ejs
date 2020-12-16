@@ -4,6 +4,7 @@
 <!-- <h1 class="h3 mb-2 text-gray-800">Report</h1> -->
 
 <!-- DataTales Example -->
+<% if (currentUser && currentUser.role) { %>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <div class="mr-sm-2 font-weight-bold text-primary">Total <%= users.length %> Users Found</div>
@@ -19,19 +20,28 @@
             <th class="text-center">Role</th>
             <th class="text-center">Area</th>
             <th class="text-center">Active</th>
+            <% if (currentUser.role === 'ADMIN') { %>
             <th class="text-center">Delete</th>
+            <% } %>
           </tr>
         </thead>
 
         <tbody>
           <% users.forEach((user) => { %>
           <tr>
-            <td><a href="/users/<%= user._id %>/edit"> <%= `${user.firstname} ${user.lastname}` %> </a></td>
+            <td>
+              <% if (currentUser.role === 'ADMIN') { %>
+              <a href="/users/<%= user._id %>/edit">
+                <% } %> <%= `${user.firstname} ${user.lastname}` %> <% if (currentUser.role === 'ADMIN') { %>
+              </a>
+              <% } %>
+            </td>
             <td><%= user.username %></td>
             <td><%= user.email %></td>
             <td><%= user.role %></td>
             <td class="text-center"><%= user.area %></td>
             <td class="text-center"><%= user.isActive ? "ACTIVE" : "INACTIVE" %></td>
+            <% if (currentUser.role === 'ADMIN') { %>
             <td class="text-center">
               <form
                 class="list-inline-item"
@@ -47,6 +57,7 @@
                 </button>
               </form>
             </td>
+            <% } %>
           </tr>
           <% }) %>
         </tbody>
@@ -54,7 +65,7 @@
     </div>
   </div>
 </div>
-<%- include ('../partial/footer') %>
+<% } %> <%- include ('../partial/footer') %>
 
 <!-- Page level custom scripts -->
 <script src="/js/lcreport.datatables.js"></script>

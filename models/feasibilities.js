@@ -11,6 +11,7 @@ const FeasibilitySchema = new mongoose.Schema({
   feasible: { type: String, uppercase: true, enum: ['YES', 'NO', 'PENDING'], default: 'PENDING' },
   media: { type: String, uppercase: true, require: true },
   name: { type: String, uppercase: true, require: true },
+  givenBy: { type: String, default: '' },
   location: { type: String, uppercase: true, default: '' },
   endAStation: { type: String, uppercase: true, require: true },
   endAAddress: { type: String, uppercase: true, require: true },

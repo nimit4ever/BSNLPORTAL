@@ -3,25 +3,25 @@ const router = express.Router();
 
 const { Unit, types, measurements } = require('../models/units');
 
-const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
+const { isLoggedIn, isActiveUser, isNodelUser, isAdminUser, isAdminOrNodelUser } = require('../middleware/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
   const query = req.query || {};
 
   units = await Unit.find(query);
   res.render('./units/index', { units });
 });
 
-router.get('/api', async (req, res) => {
+router.get('/api', [isLoggedIn, isActiveUser], async (req, res) => {
   units = await Unit.find({});
   res.json(units);
 });
 
-router.get('/new', async (req, res) => {
+router.get('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   res.render('./units/new', { types, measurements });
 });
 
-router.post('/new', async (req, res) => {
+router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   await Unit.create(req.body, (err, newUnit) => {
     if (err) {
       console.log(err);
@@ -34,7 +34,7 @@ router.post('/new', async (req, res) => {
   });
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   await Unit.findById(req.params.id, function (err, found) {
     if (err || !found) {
       console.log(err);
@@ -46,7 +46,7 @@ router.get('/:id/edit', async (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   await Unit.findByIdAndUpdate(req.params.id, req.body, (err, update) => {
     if (err || !update) {
       console.log(err);
@@ -59,7 +59,7 @@ router.put('/:id', async (req, res) => {
   });
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   await Unit.findByIdAndRemove(req.params.id, (err, removed) => {
     if (err) {
       console.log(err);

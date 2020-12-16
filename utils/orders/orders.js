@@ -121,7 +121,7 @@ class Query {
         this.$or = [{ endAStation: 'NONE' }, { endBStation: 'NONE' }];
       }
 
-      if (user && user.role && user.role !== 'NO') {
+      if (user && user.role && !(user.role === 'NO' || user.role === 'ADMIN')) {
         this[user.role] = { $exists: true };
       } else if (query.role) {
         this[query.role] = { $exists: true };

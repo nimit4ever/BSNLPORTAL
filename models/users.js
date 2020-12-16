@@ -1,6 +1,27 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-const roles = ['ADMIN', 'NO', 'LCTX', 'MLLN', 'LDTX', 'NIB', 'USER'];
+const roles = [
+  'ADMIN',
+  'NO',
+  'LCTX',
+  'MLLN',
+  'LDTX',
+  'NIB',
+  'USER',
+  'TRANS-1',
+  'TRANS-2',
+  'TRANS-3',
+  'TRANS-4',
+  'TRANS-5',
+  'KR',
+  'JB',
+  'BKT',
+  'RR',
+  'GDL',
+  'MRV',
+  'DRJ',
+  'BSS',
+];
 const areas = ['RJT', 'NONE'];
 
 mongoose.set('useNewUrlParser', true);

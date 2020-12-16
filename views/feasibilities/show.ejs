@@ -1,8 +1,7 @@
-<%- include ('../partial/header') %>
-
+<%- include ('../partial/header') %> <% if (currentUser && currentUser.role) { %>
 <!-- Content Row -->
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-lg-5 mb-3">
     <div class="card position-relative border-left-info">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Customer Detail</h6>
@@ -34,15 +33,9 @@
                 <td><%= feasibility.media %></td>
               </tr>
               <tr>
-                <td>Date</td>
+                <td>Request Date</td>
                 <td><%= moment(feasibility.date).format('YYYY/MM/DD') %></td>
               </tr>
-              <% if(feasibility.compDate) { %>
-              <tr>
-                <td>Submit Date</td>
-                <td><%= moment(feasibility.compDate).format('YYYY/MM/DD') %></td>
-              </tr>
-              <% } %>
               <tr>
                 <td>End-A Station</td>
                 <td><%= feasibility.endAStation %></td>
@@ -83,13 +76,14 @@
           </table>
         </div>
 
+        <% if(feasibility.pending) { %> <% if((currentUser.role === 'ADMIN' || currentUser.role === 'NO')) { %>
         <a href="/feasibilities/<%= feasibility._id %>/edit" class="btn btn-info btn-icon-split mr-2">
           <span class="icon text-white-50">
             <i class="fas fa-edit"></i>
           </span>
           <span class="text">Modify</span>
         </a>
-
+        <% } %> <% if(currentUser.role === 'ADMIN') { %>
         <form
           class="list-inline-item"
           action="/feasibilities/<%= feasibility._id %>?_method=DELETE"
@@ -103,11 +97,27 @@
             <span class="text">Delete</span>
           </button>
         </form>
+        <% } %> <% } else { %> <% if(currentUser.role === 'ADMIN') { %>
+        <form
+          class="list-inline-item"
+          action="/feasibilities/<%= feasibility._id %>/reset?_method=PUT"
+          method="POST"
+          onsubmit="mySubmit.disabled = true; return true;"
+        >
+          <button class="btn btn-success btn-icon-split" type="submit" name="mySubmit">
+            <span class="icon text-white-50">
+              <i class="fas fa-bolt"></i>
+            </span>
+            <span class="text">Reset</span>
+          </button>
+        </form>
+
+        <% } %> <% } %>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-lg-7 mb-3">
     <div class="card position-relative border-left-warning">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Build Estimate</h6>
@@ -117,18 +127,20 @@
           <code>In case of not feasible create estimate and submit</code>
         </div>
 
+        <% if (feasibility.pending === true) { %>
         <a href="/feasibilities/<%= feasibility._id %>/items/new" class="btn btn-secondary btn-icon-split mr-2 mb-3">
           <span class="icon text-white-50">
             <i class="fas fa-plus"></i>
           </span>
           <span class="text">Add Item</span>
         </a>
+        <% } %>
 
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th class="text-center" colspan="2">Particular</th>
+                <th class="text-center">Particular</th>
                 <th class="text-center">Measurement</th>
                 <th class="text-center">Unit Rate</th>
                 <th class="text-center">Quantity</th>
@@ -139,7 +151,8 @@
             <tbody>
               <% feasibility.itemList.forEach((list) => { %>
               <tr>
-                <td class="text-center">
+                <td class="text-left">
+                  <% if (feasibility.pending === true) { %>
                   <form
                     class="list-inline-item"
                     action="/feasibilities/<%= feasibility._id %>/items/<%= list._id %>?_method=DELETE"
@@ -152,19 +165,20 @@
                       </span>
                     </button>
                   </form>
+                  <% } %>
+                  <span><%= list.name %></span>
                 </td>
-                <td class="text-left"><%= list.name %></td>
                 <td class="text-center"><%= list.measurement %></td>
-                <td class="text-right"><%= list.unitRate %></td>
+                <td class="text-right"><%= list.unitRate.toFixed(2) %></td>
                 <td class="text-right"><%= list.qty %></td>
-                <td class="text-right"><%= list.amt %></td>
+                <td class="text-right"><%= list.amt.toFixed(2) %></td>
               </tr>
               <% }) %>
             </tbody>
             <thead>
               <tr>
-                <th class="text-center" colspan="5">Total Estimate</th>
-                <th class="text-center"><%= feasibility.estimate %></th>
+                <th class="text-center" colspan="4">Total Estimate</th>
+                <th class="text-right"><%= feasibility.estimate.toFixed(2) %></th>
               </tr>
             </thead>
           </table>
@@ -172,6 +186,53 @@
       </div>
     </div>
 
+    <% if (feasibility.pending === false) { %>
+    <div class="card position-relative border-left-danger mt-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Report</h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>Contact Admin if any change required</code>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="text-left">Particular</th>
+                <th class="text-left">Detail</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Feasibility</td>
+                <td><%= feasibility.feasible %></td>
+              </tr>
+              <tr>
+                <td>Point of Presence</td>
+                <td><%= feasibility.pop %></td>
+              </tr>
+              <tr>
+                <td>Agency Remark</td>
+                <td><%= feasibility.agencyRemark %></td>
+              </tr>
+              <tr>
+                <td>Feasibility Given By</td>
+                <td><%= feasibility.givenBy %></td>
+              </tr>
+              <% if(feasibility.compDate) { %>
+              <tr>
+                <td>Completion Date</td>
+                <td><%= moment(feasibility.compDate).format('YYYY/MM/DD') %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <% } %> <% if ( feasibility.pending === true ) { %>
     <div class="card position-relative border-left-danger mt-3">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Final Submit</h6>
@@ -212,7 +273,7 @@
         </form>
       </div>
     </div>
+    <% } %>
   </div>
 </div>
-
-<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>
+<% } %> <%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

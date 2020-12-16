@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 
-const { Feasibility, agencies, services } = require('../models/feasibilities');
+const { Feasibility } = require('../models/feasibilities');
 const { Item } = require('../models/items');
-const { Unit, types, measurements } = require('../models/units');
 
-const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
-const stations = ['RJT'];
+const { isLoggedIn, isActiveUser } = require('../middleware/auth');
 
-router.get('/new', async (req, res) => {
+router.get('/new', [isLoggedIn, isActiveUser], async (req, res) => {
   await Feasibility.findById(req.params.id, (err, foundFeasibility) => {
     if (err || !foundFeasibility) {
       console.log(err);
@@ -20,7 +18,7 @@ router.get('/new', async (req, res) => {
   });
 });
 
-router.post('/new', async (req, res) => {
+router.post('/new', [isLoggedIn, isActiveUser], async (req, res) => {
   const data = {};
   data.qty = parseInt(req.body.qty);
   data.unitRate = parseFloat(req.body.unitRate);
@@ -49,7 +47,7 @@ router.post('/new', async (req, res) => {
   });
 });
 
-router.delete('/:comment_id', async (req, res) => {
+router.delete('/:comment_id', [isLoggedIn, isActiveUser], async (req, res) => {
   await Item.findByIdAndRemove(req.params.comment_id, async (err) => {
     if (err) {
       console.log(err);
