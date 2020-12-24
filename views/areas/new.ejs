@@ -1,0 +1,17 @@
+<%- include ('../partial/header') %>
+
+<h1 class="h3 mb-4 text-gray-800">Area Form</h1>
+<form action="/areas/new" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Area Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Area Name" name="name" required />
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Submit</span>
+  </button>
+</form>
+
+<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

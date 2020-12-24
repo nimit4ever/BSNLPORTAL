@@ -39,7 +39,7 @@
         <% if(currentUser && currentUser.role && currentUser.isActive === true) { %>
 
         <!-- Heading -->
-        <div class="sidebar-heading">User</div>
+        <div class="sidebar-heading">Dashboard</div>
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
@@ -48,28 +48,6 @@
             <span>Dashboard</span></a
           >
         </li>
-        
-        <!-- Nav Item - User Collapse Menu -->
-        <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#userPage"
-            aria-expanded="true"
-            aria-controls="reportPage"
-          >
-            <i class="fas fa-user"></i>
-            <span>User</span>
-          </a>
-          <div id="userPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/users">User</a>
-            </div>
-          </div>
-        </li>
-        <% } %>
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
@@ -87,17 +65,13 @@
             aria-expanded="true"
             aria-controls="pendingOrder"
           >
-            <i class="fas fa-at"></i>
+            <i class="fab fa-atlassian"></i>
             <span>Order</span>
           </a>
           <div id="pendingOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=1">My Pending</a>
-              <a class="collapse-item" href="/orders?role=<%= currentUser.role %>&isActive=0">My Completed</a>
-              <% if(currentUser.area && (currentUser.role === 'NO' || currentUser.role === 'ADMIN')) { %>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=1">All Pending</a>
-              <a class="collapse-item" href="/orders?area=<%= currentUser.area %>&isActive=0">All Completed</a>
-              <% } %>
+              <a class="collapse-item" href="/orders">Pending</a>
+              <a class="collapse-item" href="/orders?isActive=0">Completed</a>
             </div>
           </div>
         </li>
@@ -118,7 +92,7 @@
             aria-expanded="true"
             aria-controls="reportPage"
           >
-            <i class="fas fa-align-justify"></i>
+            <i class="fas fa-check"></i>
             <span>Feasibility</span>
           </a>
           <div id="feasibilityPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -158,7 +132,56 @@
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
-        <% } %>
+        
+        <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
+        <!-- Nav Item - User Collapse Menu -->
+        <div class="sidebar-heading">User</div>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#userPage"
+            aria-expanded="true"
+            aria-controls="reportPage"
+          >
+            <i class="fas fa-user"></i>
+            <span>User</span>
+          </a>
+          <div id="userPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="/users">User</a>
+            </div>
+          </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+
+        <% } %> <% if (currentUser.role === 'ADMIN') { %>
+        <!-- Nav Item - Area Collapse Menu -->
+        <div class="sidebar-heading">Area</div>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#areaPage"
+            aria-expanded="true"
+            aria-controls="reportPage"
+          >
+            <i class="fas fa-user"></i>
+            <span>Area</span>
+          </a>
+          <div id="areaPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="/areas">Area</a>
+              <a class="collapse-item" href="/areas/new">New</a>
+            </div>
+          </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <% } %> <% } %>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -181,10 +204,10 @@
             <% if(currentUser && currentUser.role) { %>
 
             <!-- Topbar Search -->
-            <% if(currentUser.role === 'NO') { %>
+            <% if(currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-3 my-2 mw-100"
-              action="/orders/new/?area=RJT"
+              action="/orders/new"
               method="POST"
               onsubmit="myButton.disabled = true; return true;"
             >
@@ -197,10 +220,10 @@
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-              <% if(currentUser.role === 'NO') { %>
+              <% if(currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
               <form
                 class="nav-link d-inline-block d-sm-none form-inline my-2"
-                action="/orders/new/?area=RJT"
+                action="/orders/new"
                 method="POST"
                 onsubmit="myButton2.disabled = true; return true;"
               >

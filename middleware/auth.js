@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { User, roles, areas } = require('../models/users');
+const { User } = require('../models/users');
 
 const signupFormValidate = async function (req, res, next) {
   const schema = Joi.object({
@@ -9,12 +9,8 @@ const signupFormValidate = async function (req, res, next) {
     email: Joi.string().email().required().label('Email'),
     password: Joi.string().min(5).max(255).required().label('Password'),
     confirm: Joi.any().valid(Joi.ref('password')),
-    role: Joi.string()
-      .valid(...roles)
-      .label('User Role'),
-    area: Joi.string()
-      .valid(...areas)
-      .label('User Area'),
+    role: Joi.string().label('User Role'),
+    area: Joi.string().label('User Area'),
   });
 
   const { error } = await schema.validate(req.body);
@@ -58,6 +54,15 @@ const isAdminUser = function (req, res, next) {
   }
 };
 
+const isSuperAdminUser = function (req, res, next) {
+  if (req.user.role === 'SUPERADMIN') {
+    return next();
+  } else {
+    req.flash('warning', 'You have to Super Admin rights to do operation');
+    res.redirect('/auth/signin');
+  }
+};
+
 const isNodelUser = function (req, res, next) {
   if (req.user.role === 'NO') {
     return next();
@@ -76,4 +81,4 @@ const isAdminOrNodelUser = function (req, res, next) {
   }
 };
 
-module.exports = { signupFormValidate, isLoggedIn, isActiveUser, isAdminUser, isNodelUser, isAdminOrNodelUser };
+module.exports = { signupFormValidate, isLoggedIn, isActiveUser, isAdminUser, isNodelUser, isAdminOrNodelUser, isSuperAdminUser };

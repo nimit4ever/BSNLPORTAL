@@ -66,19 +66,13 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-6 mb-3 mb-sm-0">
-      <select class="form-control form-control-option" name="role" required>
-        <option value="">Select User Role...</option>
-        <% roles.forEach((role) =>{ %>
-        <option value="<%= role %>"><%= role %></option>
-        <% }) %>
+      <select id="area" class="form-control form-control-option" name="area" required>
+        <option value="">Select User Area...</option>
       </select>
     </div>
-    <div class="col-sm-6">
-      <select class="form-control form-control-option" name="area" required>
-        <option value="">Select User Area...</option>
-        <% areas.forEach((area) =>{ %>
-        <option value="<%= area %>"><%= area %></option>
-        <% }) %>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <select id="role" class="form-control form-control-option" name="role" required>
+        <option value="">Select User Role...</option>
       </select>
     </div>
   </div>
@@ -93,3 +87,8 @@
 </div>
 
 <%- include("./partial/footer") %>
+
+<!-- Page level custom scripts -->
+<script src="/js/auth/signup.js"></script>
+
+<%- include("./partial/footer2") %>

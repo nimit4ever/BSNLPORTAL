@@ -5,8 +5,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const ItemSchema = new mongoose.Schema({
-  name: { type: String, require: true },
-  measurement: { type: String, require: true },
+  name: { type: String, uppercase: true, require: true },
+  measurement: { type: String, uppercase: true, require: true },
   qty: { type: Number, require: true },
   unitRate: { type: Number, require: true },
   amt: { type: Number, default: 0 },

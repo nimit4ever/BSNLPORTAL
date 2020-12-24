@@ -1,0 +1,79 @@
+<%- include ('../partial/header') %> <% if (currentUser && currentUser.role) { %>
+<!-- Content Row -->
+<div class="row">
+  <div class="col-lg-6 mb-3">
+    <div class="card position-relative border-left-info">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Area Name: <%= area.name %></h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>Kindly add Agency Here</code>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="text-left">Particular</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% area.role.forEach((role) => { %>
+              <tr>
+                <td><%= role %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <form
+          class="form-inline mr-auto ml-3 my-2 mw-100"
+          action="/areas/<%= area._id %>/addrole?_method=PUT"
+          method="POST"
+          onsubmit="mySubmit.disabled = true; return true;"
+        >
+          <input type="text" class="form-control" placeholder="Role Name" name="role" />
+          <button class="btn btn-success btn-icon-split ml-2" type="submit" name="mySubmit">
+            <span class="icon text-white-50">
+              <i class="fas fa-check"></i>
+            </span>
+            <span class="text">Add Role</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 mb-3">
+    <div class="card position-relative border-left-warning">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Area Name: <%= area.name %></h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <code>Order pending Reason</code>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="text-left">Particular</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% area.reason.forEach((reason) => { %>
+              <tr>
+                <td><%= reason %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %> <%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>

@@ -15,6 +15,7 @@ const { User } = require('./models/users');
 
 // Require Router
 const authRoute = require('./routes/auth');
+const areasRoute = require('./routes/areas');
 const usersRoute = require('./routes/users');
 const ordersRoute = require('./routes/orders');
 const feasibilitiesRoute = require('./routes/feasibilities');
@@ -70,6 +71,7 @@ app.get('/', async (req, res) => {
   res.redirect('/users/dashboard');
 });
 app.use('/auth', authRoute);
+app.use('/areas', areasRoute);
 app.use('/users', usersRoute);
 app.use('/orders', ordersRoute);
 app.use('/feasibilities', feasibilitiesRoute);

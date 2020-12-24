@@ -12,7 +12,9 @@ rule.hour = [new schedule.Range(10, 18)];
 rule.minute = 0;
 
 try {
-  const j = schedule.scheduleJob(rule, fetchAreaOrder);
+  const j = schedule.scheduleJob(rule, async () => {
+    await fetchAreaOrder('RJT');
+  });
 } catch (err) {
   console.log(err.message);
 }
@@ -49,8 +51,7 @@ async function updateTask(oldTasks, newTasks = {}) {
   }
 }
 
-async function fetchAreaOrder(area) {
-  area = 'RJT';
+async function fetchAreaOrders(area) {
   const findObj = { $or: [{ endAStation: area }, { endBStation: area }], isActive: true };
   const totalOrders = await fetchOrders(area);
   if (totalOrders.length === 0) {
@@ -106,38 +107,4 @@ async function fetchAreaOrder(area) {
   }
 }
 
-class Query {
-  constructor({ query = undefined, user = undefined }) {
-    if (query) {
-      if (query.isActive) {
-        this.isActive = query.isActive && query.isActive == 0 ? false : true;
-      }
-
-      if (user && user.area) {
-        this.$or = [{ endAStation: user.area }, { endBStation: user.area }];
-      } else if (query.area) {
-        this.$or = [{ endAStation: query.area }, { endBStation: query.area }];
-      } else {
-        this.$or = [{ endAStation: 'NONE' }, { endBStation: 'NONE' }];
-      }
-
-      if (user && user.role && !(user.role === 'NO' || user.role === 'ADMIN')) {
-        this[user.role] = { $exists: true };
-      } else if (query.role) {
-        this[query.role] = { $exists: true };
-      }
-
-      if (query.reason) {
-        if (query.reason === 'INCOMPLETE') {
-          this.reason = { $not: { $in: ['COMMISSIONED', 'CANCELLED'] } };
-        } else {
-          this.reason = query.reason;
-        }
-      }
-      if (query.agency) this.agency = query.agency != 0 ? query.agency : '';
-      if (query.orderType) this.orderType = query.orderType;
-    }
-  }
-}
-
-module.exports = { fetchAreaOrder, Query };
+module.exports = { fetchAreaOrders };

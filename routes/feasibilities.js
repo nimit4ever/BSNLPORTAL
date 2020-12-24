@@ -1,22 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
-const { Feasibility, agencies, services } = require('../models/feasibilities');
+const { Feasibility, services } = require('../models/feasibilities');
 const { Item } = require('../models/items');
 
-const { QueryFeasibility } = require('../utils//feasibilities/feasibilities');
+const { FeasibilityQueryBuild } = require('../utils/feasibilities/feasibilityQueryBuild');
 
 const { isLoggedIn, isActiveUser, isAdminUser, isAdminOrNodelUser } = require('../middleware/auth');
-const stations = ['RJT'];
 
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
-  const findObj = new QueryFeasibility(req);
+  let findObj = {};
+  if (req.query && req.user && req.user.role && req.user.area) {
+    findObj = new FeasibilityQueryBuild(req.user, req.query);
+  } else if (req.user && req.user.role && req.user.area) {
+    findObj = new FeasibilityQueryBuild(req.user);
+  } else {
+    findObj = { select: 'NONE' };
+  }
+
   feasibilities = await Feasibility.find(findObj);
   res.render('./feasibilities/index', { feasibilities });
 });
 
+router.get('/api', [isLoggedIn, isActiveUser], async (req, res) => {
+  let findObj = {};
+  if (req.query && req.user && req.user.role && req.user.area) {
+    findObj = new FeasibilityQueryBuild(req.user, req.query);
+  } else if (req.user && req.user.role && req.user.area) {
+    findObj = new FeasibilityQueryBuild(req.user);
+  } else {
+    findObj = { select: 'NONE' };
+  }
+
+  feasibilities = await Feasibility.find(findObj);
+  res.json(feasibilities);
+});
+
 router.get('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
-  res.render('./feasibilities/new', { agencies, stations, services });
+  res.render('./feasibilities/new', { services });
 });
 
 router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
@@ -54,13 +75,13 @@ router.get('/:id', [isLoggedIn, isActiveUser], async (req, res) => {
 });
 
 router.get('/:id/edit', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
-  await Feasibility.findById(req.params.id, function (err, found) {
+  await Feasibility.findById(req.params.id, (err, found) => {
     if (err || !found) {
       console.log(err);
       req.flash('error', 'Feasibility not found');
       res.redirect('back');
     } else {
-      res.render('feasibilities/edit', { feasibility: found, agencies, stations, services });
+      res.render('feasibilities/edit', { feasibility: found, services });
     }
   });
 });
@@ -96,6 +117,7 @@ router.put('/:id/reset', [isLoggedIn, isActiveUser, isAdminUser], async (req, re
     req.flash('error', `Can not find feasibility to Reset`);
     res.redirect('back');
   } else {
+    update.feasible = 'PENDING';
     update.compDate = '';
     update.pending = true;
     update.givenBy = '';

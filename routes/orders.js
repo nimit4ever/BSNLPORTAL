@@ -4,34 +4,53 @@ const router = express.Router();
 
 const { Order, agencies, reasons } = require('../models/orders');
 
-const { fetchAreaOrder, Query } = require('../utils/orders/orders');
+const { fetchAreaOrders } = require('../utils/orders/fetchAreaOrders');
+const { OrderQueryBuild } = require('../utils/orders/orderQueryBuild');
 const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
 
 let referer = '';
 
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
-  const findObj = new Query(req);
+  let findObj = {};
+  if (req.query && req.user && req.user.role && req.user.area) {
+    findObj = new OrderQueryBuild(req.user, req.query);
+  } else if (req.user && req.user.role && req.user.area) {
+    findObj = new OrderQueryBuild(req.user);
+  } else {
+    findObj = { select: 'NONE' };
+  }
   orders = await Order.find(findObj);
   res.render('./orders/index', { orders });
 });
 
 router.get('/api', [isLoggedIn, isActiveUser], async (req, res) => {
-  const findObj = new Query(req);
+  let findObj = {};
+  if (req.query && req.user && req.user.role && req.user.area) {
+    findObj = new OrderQueryBuild(req.user, req.query);
+  } else if (req.user && req.user.role && req.user.area) {
+    findObj = new OrderQueryBuild(req.user);
+  } else {
+    findObj = { select: 'NONE' };
+  }
   orders = await Order.find(findObj);
   res.json(orders);
 });
 
 router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
-  const area = req.query.area;
-  try {
-    await fetchAreaOrder(area);
-  } catch (err) {
-    console.log(err.message);
-    req.flash('error', 'Can not connect to the database');
+  if (req.user && req.user.area) {
+    try {
+      await fetchAreaOrders(req.user.area);
+    } catch (err) {
+      console.log(err.message);
+      req.flash('error', 'Can not connect to the database');
+      res.redirect('back');
+    }
+    req.flash('success', 'Database Updated Successfully');
+    res.redirect('back');
+  } else {
+    req.flash('error', 'Can not fetch');
     res.redirect('back');
   }
-  req.flash('success', 'Database Updated Successfully');
-  res.redirect('back');
 });
 
 router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {

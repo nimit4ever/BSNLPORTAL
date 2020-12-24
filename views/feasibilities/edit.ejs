@@ -27,9 +27,6 @@
       <label for="endAStation">End-A Station</label>
       <select class="form-control form-control-option" id="endAStation" name="endAStation" required>
         <option value="<%= feasibility.endAStation %>"><%= feasibility.endAStation %></option>
-        <% stations.forEach((station) =>{ %>
-        <option value="<%= station %>"><%= station %></option>
-        <% }) %>
       </select>
     </div>
     <div class="form-group col-md-4">
@@ -40,9 +37,6 @@
       <label for="endBStation">End-B Station</label>
       <select class="form-control form-control-option" id="endBStation" name="endBStation">
         <option value="<%= feasibility.endBStation %>"><%= feasibility.endBStation %></option>
-        <% stations.forEach((station) =>{ %>
-        <option value="<%= station %>"><%= station %></option>
-        <% }) %>
       </select>
     </div>
     <div class="form-group col-md-4">
@@ -53,12 +47,9 @@
 
   <div class="form-row">
     <div class="form-group col-md-2">
-      <label for="agency">Agency</label>
-      <select class="form-control form-control-option" id="agency" name="agency" required>
+      <label for="role">Agency</label>
+      <select class="form-control form-control-option" id="role" name="agency" required>
         <option value="<%= feasibility.agency %>"><%= feasibility.agency %></option>
-        <% agencies.forEach((agency) =>{ %>
-        <option value="<%= agency %>"><%= agency %></option>
-        <% }) %>
       </select>
     </div>
     <div class="form-group col-md-2">
@@ -96,4 +87,9 @@
   </div>
 </form>
 
-<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>
+<%- include ('../partial/footer') %>
+
+<!-- Page level custom scripts -->
+<script src="/js/feasibilities/edit.js"></script>
+
+<%- include ('../partial/footer2') %>

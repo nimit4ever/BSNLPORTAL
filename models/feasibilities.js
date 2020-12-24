@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const agencies = ['NOT ASSIGN', 'TRANS-1', 'TRANS-2', 'TRANS-3', 'TRANS-4', 'TRANS-5', 'KR', 'JB', 'BKT', 'RR', 'GDL', 'MRV', 'DRJ', 'BSS'];
 const services = ['ILL', 'MPLS', 'FTTH', 'P2P'];
 
 mongoose.set('useNewUrlParser', true);
@@ -26,10 +25,10 @@ const FeasibilitySchema = new mongoose.Schema({
   pop: { type: String, uppercase: true, default: '' },
   estimate: { type: Number, default: 0 },
   itemList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-  agency: { type: String, uppercase: true, enum: agencies, default: 'NOT ASSIGN' },
+  agency: { type: String, uppercase: true, default: 'NOT ASSIGN' },
   agencyRemark: { type: String, uppercase: true, default: '' },
 });
 
 const Feasibility = mongoose.model('Feasibility', FeasibilitySchema);
 
-module.exports = { Feasibility, agencies, services };
+module.exports = { Feasibility, services };

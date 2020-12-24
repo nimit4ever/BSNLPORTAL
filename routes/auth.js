@@ -4,8 +4,8 @@ const passport = require('passport');
 const async = require('async');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const { User, roles, areas } = require('../models/users');
-const { isLoggedIn, isAdminUser, signupFormValidate } = require('../middleware/auth');
+const { User } = require('../models/users');
+const { signupFormValidate } = require('../middleware/auth');
 
 // Root
 router.get('/', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 // Signup Form
 router.get('/signup', (req, res) => {
-  res.render('./auth/signup', { roles, areas });
+  res.render('./auth/signup');
 });
 
 // Signup Handle
