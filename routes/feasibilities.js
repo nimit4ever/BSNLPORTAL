@@ -47,7 +47,7 @@ router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, 
       req.flash('error', 'Can not add please try again');
       res.redirect('back');
     } else {
-      req.flash('success', `Created successfully unique id is ${newFeasibility._id}`);
+      req.flash('success', `Created successfully`);
       res.redirect('back');
     }
   });
@@ -101,7 +101,7 @@ router.put('/:id', [isLoggedIn, isActiveUser], async (req, res) => {
         req.flash('error', `Can not update please try again`);
         res.redirect('back');
       } else {
-        req.flash('primary', `Feasibility of ${update.name} vide ID: ${update._id} Updated`);
+        req.flash('primary', `Feasibility Updated`);
         res.redirect('/feasibilities');
       }
     });
@@ -126,7 +126,7 @@ router.put('/:id/reset', [isLoggedIn, isActiveUser, isAdminUser], async (req, re
         req.flash('error', `Can not reset please try again`);
         res.redirect('back');
       } else {
-        req.flash('primary', `Feasibility of ${update.name} vide ID: ${update._id} Reset`);
+        req.flash('primary', `Feasibility Reset`);
         res.redirect('/feasibilities');
       }
     });
@@ -134,22 +134,22 @@ router.put('/:id/reset', [isLoggedIn, isActiveUser, isAdminUser], async (req, re
 });
 
 router.delete('/:id', [isLoggedIn, isActiveUser, isAdminUser], async (req, res) => {
-  await Feasibility.findByIdAndRemove(req.params.id, (err, removed) => {
+  const removed = await Feasibility.findById(req.params.id);
+  await Item.deleteMany({ _id: { $in: removed.itemList } }, (err) => {
+    if (err) {
+      console.log(err);
+      req.flash('error', `Can not delete please try again`);
+      res.redirect('/feasibilities');
+    }
+  });
+  await Feasibility.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       console.log(err);
       req.flash('error', `Can not delete please try again`);
       res.redirect('/feasibilities');
     } else {
-      Item.deleteMany({ _id: { $in: removed.itemList } }, (err) => {
-        if (err) {
-          console.log(err);
-          req.flash('error', `Can not delete please try again`);
-          res.redirect('/feasibilities');
-        } else {
-          req.flash('warning', `Feasibility of ${removed.name} vide ID: ${removed._id} Removed`);
-          res.redirect('/feasibilities');
-        }
-      });
+      req.flash('warning', `Feasibility Removed`);
+      res.redirect('/feasibilities');
     }
   });
 });

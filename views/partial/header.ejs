@@ -203,36 +203,9 @@
 
             <% if(currentUser && currentUser.role) { %>
 
-            <!-- Topbar Search -->
-            <% if(currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
-            <form
-              class="d-none d-sm-inline-block form-inline mr-auto ml-3 my-2 mw-100"
-              action="/orders/new"
-              method="POST"
-              onsubmit="myButton.disabled = true; return true;"
-            >
-              <button type="submit" class="btn btn-success btn-icon-split" name="myButton">
-                <span class="icon text-white-50"><i class="fas fa-sync-alt"></i></span>
-                <span class="text">Manual Sync</span>
-              </button>
-            </form>
-            <% } %>
-
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-              <% if(currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
-              <form
-                class="nav-link d-inline-block d-sm-none form-inline my-2"
-                action="/orders/new"
-                method="POST"
-                onsubmit="myButton2.disabled = true; return true;"
-              >
-                <button type="submit" class="btn" name="myButton2">
-                  <i class="fas fa-sync-alt"></i>
-                </button>
-              </form>
-              <% } %>
-
+              
               <div class="topbar-divider d-none d-sm-block"></div>
 
               <!-- Nav Item - User Information -->

@@ -13,7 +13,7 @@ rule.minute = 0;
 
 try {
   const j = schedule.scheduleJob(rule, async () => {
-    await fetchAreaOrder('RJT');
+    await fetchOrders('RJT');
   });
 } catch (err) {
   console.log(err.message);

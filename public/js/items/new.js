@@ -1,20 +1,21 @@
 $(document).ready(() => {
-  $.get('/units/api', (units) => {
-    function groupBy(objectArray, property) {
-      return objectArray.reduce((acc, obj) => {
-        let key = obj[property];
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-        acc[key].push(obj);
-        return acc;
-      }, {});
-    }
+  function groupBy(objectArray, property) {
+    return objectArray.reduce((acc, obj) => {
+      let key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
 
+  const typeOption = $('select#type');
+  const nameOption = $('select#name');
+
+  $.get('/units/api', (units) => {
     const groupedUnits = groupBy(units, 'type');
     const uniqueUnits = Object.keys(groupedUnits);
-
-    const typeOption = $('select#type');
 
     uniqueUnits.sort((a, b) => (a > b ? 1 : -1));
     uniqueUnits.forEach((uniqueUnit) => {
@@ -26,9 +27,8 @@ $(document).ready(() => {
       );
     });
 
-    $('select#type').on('change', function () {
+    typeOption.on('change', function () {
       const typeNames = groupedUnits[this.value];
-      const nameOption = $('select#name');
       nameOption.empty();
       nameOption.append(
         $('<option/>', {
@@ -36,19 +36,23 @@ $(document).ready(() => {
           text: 'SELECT',
         })
       );
+      $('input#unitRate').val(0);
+      $('input#measurement').val('');
 
-      typeNames.sort((a, b) => (a.name > b.name ? 1 : -1));
-      typeNames.forEach((typeName) => {
-        nameOption.append(
-          $('<option/>', {
-            value: typeName._id + ':' + typeName.name,
-            text: typeName.name,
-          })
-        );
-      });
+      if (typeNames) {
+        typeNames.sort((a, b) => (a.name > b.name ? 1 : -1));
+        typeNames.forEach((typeName) => {
+          nameOption.append(
+            $('<option/>', {
+              value: `${typeName._id}:${typeName.name}`,
+              text: typeName.name,
+            })
+          );
+        });
+      }
     });
 
-    $('select#name').on('change', function () {
+    nameOption.on('change', function () {
       const value = this.value.split(':')[0];
       const selectName = units.find((unit) => {
         if (unit._id === value) {

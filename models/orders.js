@@ -1,23 +1,4 @@
 const mongoose = require('mongoose');
-const agencies = ['NOT ASSIGN', 'TRANS-1', 'TRANS-2', 'TRANS-3', 'TRANS-4', 'TRANS-5', 'KR', 'JB', 'BKT', 'RR', 'GDL', 'MRV', 'DRJ'];
-const reasons = [
-  'NOT ASSIGN',
-  'COMMISSIONED',
-  'CANCELLED',
-  'CUSTOMER END',
-  'VENDOR END',
-  'TNF',
-  'WIP',
-  'COPPER CABLE REQ',
-  'OFC CABLE REQ',
-  'ORDER MODIFY REQ',
-  'MLLN MODEM REQ',
-  'VMUX FULL',
-  'VMUX CARD REQ',
-  'OFC MATERIAL REQ',
-  'OTHERS',
-  'CAPAX INVOLVED',
-];
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -54,10 +35,10 @@ const OrderSchema = new mongoose.Schema({
   endBStation: { type: String, uppercase: true, default: '' },
   endBAddress: { type: String, uppercase: true, default: '' },
   location: { type: String, uppercase: true, default: '' },
-  agency: { type: String, uppercase: true, enum: agencies, default: 'NOT ASSIGN' },
-  reason: { type: String, uppercase: true, enum: reasons, default: 'NOT ASSIGN' },
+  agency: { type: String, uppercase: true, default: 'NOT ASSIGN' },
+  reason: { type: String, uppercase: true, default: 'NOT ASSIGN' },
   remark: { type: String, uppercase: true, default: '' },
 });
 
 const Order = mongoose.model('Order', OrderSchema);
-module.exports = { Order, agencies, reasons };
+module.exports = { Order };

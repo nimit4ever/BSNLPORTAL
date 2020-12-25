@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { Unit, types, measurements } = require('../models/units');
 
-const { isLoggedIn, isActiveUser, isNodelUser, isAdminUser, isAdminOrNodelUser } = require('../middleware/auth');
+const { isLoggedIn, isActiveUser, isAdminOrNodelUser } = require('../middleware/auth');
 
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
   const query = req.query || {};
@@ -28,7 +28,7 @@ router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, 
       req.flash('error', 'Can not add please try again');
       res.redirect('back');
     } else {
-      req.flash('success', `Created successfully unique id is ${newUnit._id}`);
+      req.flash('success', `Created successfully`);
       res.redirect('back');
     }
   });
@@ -53,7 +53,7 @@ router.put('/:id', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, r
       req.flash('error', `Can not update please try again`);
       res.redirect('back');
     } else {
-      req.flash('primary', `Unit of ${update.name} vide ID: ${update._id} Updated`);
+      req.flash('primary', `Unit Updated`);
       res.redirect('/units');
     }
   });
@@ -66,7 +66,7 @@ router.delete('/:id', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req
       req.flash('error', `Can not delete please try again`);
       res.redirect('/units');
     } else {
-      req.flash('warning', `Unit of ${removed.name} vide ID: ${removed._id} Removed`);
+      req.flash('warning', `Unit Removed`);
       res.redirect('/units');
     }
   });

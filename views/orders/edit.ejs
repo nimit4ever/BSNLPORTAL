@@ -64,18 +64,12 @@
       <label for="agency">Agency</label>
       <select class="form-control form-control-option" id="agency" name="agency" required>
         <option value="<%= order.agency %>"><%= order.agency %></option>
-        <% agencies.forEach((agency) =>{ %>
-        <option value="<%= agency %>"><%= agency %></option>
-        <% }) %>
       </select>
     </div>
     <div class="form-group col-md-4">
       <label for="reason">Pending Reason</label>
       <select class="form-control form-control-option" id="reason" name="reason" required>
         <option value="<%= order.reason %>"><%= order.reason %></option>
-        <% reasons.forEach((reason) =>{ %>
-        <option value="<%= reason %>"><%= reason %></option>
-        <% }) %>
       </select>
     </div>
   </div>
@@ -119,4 +113,9 @@
   </div>
 </form>
 
-<%- include ('../partial/footer') %> <%- include ('../partial/footer2') %>
+<%- include ('../partial/footer') %>
+
+<!-- Page level custom scripts -->
+<script src="/js/orders/edit.js"></script>
+
+<%- include ('../partial/footer2') %>

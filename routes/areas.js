@@ -26,8 +26,7 @@ router.post('/new', [isLoggedIn, isActiveUser, isAdminUser], async (req, res) =>
       req.flash('error', 'Can not add please try again');
       res.redirect('back');
     } else {
-      console.log(newArea);
-      req.flash('success', `Created successfully unique id is ${newArea._id}`);
+      req.flash('success', `Created successfully`);
       res.redirect('/areas');
     }
   });

@@ -51,7 +51,7 @@ router.delete('/:id', [isActiveUser, isLoggedIn, isAdminUser], async (req, res) 
       req.flash('error', `Can not delete please try again`);
       res.redirect('/users');
     } else {
-      req.flash('warning', `User of ${removed.username} vide ID: ${removed._id} Removed`);
+      req.flash('warning', `User Removed`);
       res.redirect('/users');
     }
   });

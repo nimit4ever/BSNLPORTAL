@@ -2,7 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 
-const { Order, agencies, reasons } = require('../models/orders');
+const { Order } = require('../models/orders');
 
 const { fetchAreaOrders } = require('../utils/orders/fetchAreaOrders');
 const { OrderQueryBuild } = require('../utils/orders/orderQueryBuild');
@@ -60,7 +60,7 @@ router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res
     res.redirect('back');
   } else {
     referer = req.headers.referer.split(':3000')[1];
-    res.render('./orders/edit', { order, agencies, reasons });
+    res.render('./orders/edit', { order });
   }
 });
 

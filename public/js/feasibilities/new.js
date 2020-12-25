@@ -1,8 +1,9 @@
 $(document).ready(() => {
-  $.get('/areas/api', (areas) => {
-    const endAStation = $('select#endAStation');
-    const endBStation = $('select#endBStation');
+  const endAStation = $('select#endAStation');
+  const endBStation = $('select#endBStation');
+  const roleOption = $('select#role');
 
+  $.get('/areas/api', (areas) => {
     areas.sort((a, b) => (a.name > b.name ? 1 : -1));
     areas.forEach((area) => {
       endAStation.append(
@@ -19,12 +20,11 @@ $(document).ready(() => {
       );
     });
 
-    $('select#endAStation').on('change', function () {
+    endAStation.on('change', function () {
       const selectedArea = areas.find((area) => {
         if (area.name === this.value) return area.role;
       });
-      const roles = selectedArea.role;
-      const roleOption = $('select#role');
+
       roleOption.empty();
       roleOption.append(
         $('<option/>', {
@@ -33,14 +33,16 @@ $(document).ready(() => {
         })
       );
 
-      roles.forEach((role) => {
-        roleOption.append(
-          $('<option/>', {
-            value: role,
-            text: role,
-          })
-        );
-      });
+      if (selectedArea && selectedArea.role) {
+        selectedArea.role.forEach((role) => {
+          roleOption.append(
+            $('<option/>', {
+              value: role,
+              text: role,
+            })
+          );
+        });
+      }
     });
   });
 });

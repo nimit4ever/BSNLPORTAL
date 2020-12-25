@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const services = ['ILL', 'MPLS', 'FTTH', 'P2P'];
+const services = ['ILL', 'MPLS', 'FTTH', 'P2P', 'MOBILE'];
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);

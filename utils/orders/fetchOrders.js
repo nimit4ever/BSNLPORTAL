@@ -1,7 +1,6 @@
 const axios = require('axios');
 const qs = require('qs');
 const htmlTableToJson = require('html-table-to-json');
-const fs = require('fs');
 
 module.exports = async (area) => {
   const totalOrder = [];
