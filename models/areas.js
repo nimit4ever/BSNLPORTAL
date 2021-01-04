@@ -6,7 +6,7 @@ mongoose.set('useCreateIndex', true);
 
 const AreaSchema = new mongoose.Schema({
   name: { type: String, uppercase: true, require: true },
-  role: { type: [String], default: ['NOT ASSIGN', 'ADMIN', 'NO', 'NIB', 'MLLN', 'LCTX', 'LDTX'] },
+  role: { type: [String], default: ['NONE', 'ADMIN', 'NO', 'NIB', 'MLLN', 'LCTX', 'LDTX'] },
   reason: {
     type: [String],
     default: [

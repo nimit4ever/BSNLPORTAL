@@ -1,28 +1,5 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-const roles = [
-  'ADMIN',
-  'NO',
-  'LCTX',
-  'MLLN',
-  'LDTX',
-  'NIB',
-  'USER',
-  'TRANS-1',
-  'TRANS-2',
-  'TRANS-3',
-  'TRANS-4',
-  'TRANS-5',
-  'KR',
-  'JB',
-  'BKT',
-  'RR',
-  'GDL',
-  'MRV',
-  'DRJ',
-  'BSS',
-];
-const areas = ['RJT', 'NONE'];
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -31,16 +8,16 @@ mongoose.set('useCreateIndex', true);
 const UserSchema = new mongoose.Schema({
   firstname: { type: String, uppercase: true, required: true, minlength: 3, maxlength: 50 },
   lastname: { type: String, uppercase: true, required: true, minlength: 3, maxlength: 50 },
-  username: { type: String, lowercase: true, required: true, minlength: 5, maxlength: 50, unique: true },
+  username: { type: Number, required: true, min: 7000000000, max: 9999999999, unique: true },
   email: { type: String, lowercase: true, required: true, minlength: 5, maxlength: 255, unique: true },
   isActive: { type: Boolean, default: false },
   created: { type: Date, default: Date.now },
-  role: { type: String, uppercase: true, enum: roles, default: 'USER' },
-  area: { type: String, uppercase: true, enum: areas, default: 'NONE' },
-  resetPasswordToken: { type: String, default: undefined },
-  resetPasswordExpires: { type: Date, default: undefined },
+  role: { type: String, uppercase: true, default: 'NONE' },
+  area: { type: String, uppercase: true, default: 'NONE' },
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date },
 });
 
 UserSchema.plugin(passportLocalMongoose);
 const User = mongoose.model('User', UserSchema);
-module.exports = { User, roles, areas };
+module.exports = { User };

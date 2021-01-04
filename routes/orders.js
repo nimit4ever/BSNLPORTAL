@@ -1,4 +1,3 @@
-const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 
@@ -6,7 +5,7 @@ const { Order } = require('../models/orders');
 
 const { fetchAreaOrders } = require('../utils/orders/fetchAreaOrders');
 const { OrderQueryBuild } = require('../utils/orders/orderQueryBuild');
-const { isLoggedIn, isActiveUser, isNodelUser } = require('../middleware/auth');
+const { isLoggedIn, isActiveUser, isAdminOrNodelUser } = require('../middleware/auth');
 
 let referer = '';
 
@@ -36,24 +35,19 @@ router.get('/api', [isLoggedIn, isActiveUser], async (req, res) => {
   res.json(orders);
 });
 
-router.post('/new', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
-  if (req.user && req.user.area) {
-    try {
-      await fetchAreaOrders(req.user.area);
-    } catch (err) {
-      console.log(err.message);
-      req.flash('error', 'Can not connect to the database');
-      res.redirect('back');
-    }
+router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
+  try {
+    await fetchAreaOrders(req.user.area);
     req.flash('success', 'Database Updated Successfully');
-    res.redirect('back');
-  } else {
-    req.flash('error', 'Can not fetch');
-    res.redirect('back');
+    res.redirect('/orders');
+  } catch (err) {
+    console.log(err.message);
+    req.flash('error', 'Can not Sync database');
+    res.redirect('/orders');
   }
 });
 
-router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
+router.get('/:id/edit', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
   const order = await Order.findOne({ orderId: req.params.id });
   if (!order) {
     req.flash('error', `Can not find Order: ${req.params.id}`);
@@ -64,21 +58,17 @@ router.get('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res
   }
 });
 
-router.put('/:id/edit', [isLoggedIn, isActiveUser, isNodelUser], async (req, res) => {
-  const order = await Order.findOneAndUpdate({ orderId: req.params.id }, req.body);
-  console.log(req.body);
-  if (!order) {
-    req.flash('error', `Can not find Order: ${req.params.id}`);
-    res.redirect(referer);
-  } else {
+router.put('/:id/edit', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
+  try {
+    const order = await Order.findOneAndUpdate({ orderId: req.params.id }, req.body);
     await order.save((err) => {
-      if (err) {
-        console.log(err.message);
-        req.flash('error', `Can not update Order: ${req.params.id}`);
-        res.redirect(referer);
-      }
+      if (err) throw err;
     });
     req.flash('success', `${req.params.id} :  Saved Successfully`);
+    res.redirect(referer);
+  } catch (err) {
+    console.log(err.message);
+    req.flash('error', `Can not update Order: ${req.params.id}`);
     res.redirect(referer);
   }
 });

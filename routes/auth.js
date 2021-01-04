@@ -35,7 +35,7 @@ router.post('/signup', [signupFormValidate], async (req, res) => {
 
 //	Signin form
 router.get('/signin', (req, res) => {
-  res.render('./auth/signin', { referer: req.headers.referer });
+  res.render('./auth/signin');
 });
 
 // Signin Handle
@@ -47,13 +47,8 @@ router.post(
     failureFlash: 'Invalid Username or Password...! Please try Again...!',
   }),
   (req, res) => {
-    if (req.body.referer && req.body.referer !== undefined && req.body.referer.slice(-7) !== '/signin') {
-      req.flash('success', `Welcome ${req.user.firstname} ${req.user.lastname}`);
-      res.redirect(req.body.referer);
-    } else {
-      req.flash('success', `Welcome ${req.user.firstname} ${req.user.lastname}`);
-      res.redirect('/users/dashboard');
-    }
+    req.flash('success', `Welcome ${req.user.firstname} ${req.user.lastname}`);
+    res.redirect('/users/dashboard');
   }
 );
 

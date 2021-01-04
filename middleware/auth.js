@@ -5,7 +5,7 @@ const signupFormValidate = async function (req, res, next) {
   const schema = Joi.object({
     firstname: Joi.string().min(3).max(50).required().label('First Name'),
     lastname: Joi.string().min(3).max(50).required().label('Last Name'),
-    username: Joi.string().min(5).max(50).required().label('Username'),
+    username: Joi.number().integer().min(7000000000).max(9999999999).required().label('Mobile'),
     email: Joi.string().email().required().label('Email'),
     password: Joi.string().min(5).max(255).required().label('Password'),
     confirm: Joi.any().valid(Joi.ref('password')),
@@ -37,10 +37,19 @@ const isLoggedIn = function (req, res, next) {
 };
 
 const isActiveUser = function (req, res, next) {
-  if (req.user.isActive) {
+  if (req.user && req.user.isActive) {
     return next();
   } else {
     req.flash('error', 'User inactive kindly contact Nodel Officer');
+    res.redirect('/auth/signin');
+  }
+};
+
+const isSelfUser = function (req, res, next) {
+  if ((req.params.id && req.user.isActive && req.params.id == req.user._id) || req.user.role === 'ADMIN') {
+    return next();
+  } else {
+    req.flash('error', 'You can edit only your Account');
     res.redirect('/auth/signin');
   }
 };
@@ -81,4 +90,13 @@ const isAdminOrNodelUser = function (req, res, next) {
   }
 };
 
-module.exports = { signupFormValidate, isLoggedIn, isActiveUser, isAdminUser, isNodelUser, isAdminOrNodelUser, isSuperAdminUser };
+module.exports = {
+  signupFormValidate,
+  isLoggedIn,
+  isActiveUser,
+  isSelfUser,
+  isAdminUser,
+  isNodelUser,
+  isAdminOrNodelUser,
+  isSuperAdminUser,
+};
