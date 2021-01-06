@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BSNL PORTAL</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      body {
+        font-family: 'Courier New';
+      }
+      .right {
+        text-align: right;
+      }
+      .yes {
+        color: green;
+      }
+      .no {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <% if(feasibility.feasible === 'YES') { %>
+    <h3 class="yes">Location Feasible with Estimated CAPEX Rs. <%= feasibility.estimate.toFixed(2) %></h3>
+    <% } else { %>
+    <h3 class="no">Location not Feasible with Estimated CAPEX Rs. <%= feasibility.estimate.toFixed(2) %></h3>
+    <% } %>
+
+    <div>
+      <h4>Feasibility Report</h4>
+      <table>
+        <tr>
+          <th>Particular</th>
+          <th>Detail</th>
+        </tr>
+
+        <tr>
+          <td>Unique ID</td>
+          <td><%= feasibility._id %></td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td><%= feasibility.name %></td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td><%= feasibility.location %></td>
+        </tr>
+        <tr>
+          <td>Media</td>
+          <td><%= feasibility.media %></td>
+        </tr>
+        <tr>
+          <td>Request Date</td>
+          <td><%= moment(feasibility.date).format('YYYY/MM/DD') %></td>
+        </tr>
+        <tr>
+          <td>End-A Station</td>
+          <td><%= feasibility.endAStation %></td>
+        </tr>
+        <tr>
+          <td>End-A Address</td>
+          <td><%= feasibility.endAAddress %></td>
+        </tr>
+        <tr>
+          <td>End-B Station</td>
+          <td><%= feasibility.endBStation %></td>
+        </tr>
+        <tr>
+          <td>End-B Address</td>
+          <td><%= feasibility.endBAddress %></td>
+        </tr>
+        <tr>
+          <td>Agency</td>
+          <td><%= feasibility.agency %></td>
+        </tr>
+        <tr>
+          <td>Service</td>
+          <td><%= feasibility.service %></td>
+        </tr>
+        <tr>
+          <td>Bandwidth</td>
+          <td><%= feasibility.bandwidth %></td>
+        </tr>
+        <tr>
+          <td>Old Bandwidth</td>
+          <td><%= feasibility.prevBandwidth %></td>
+        </tr>
+        <tr>
+          <td>Remark</td>
+          <td><%= feasibility.remark %></td>
+        </tr>
+        <tr>
+          <td>Feasibility Request By</td>
+          <td><%= feasibility.createBy %></td>
+        </tr>
+        <tr>
+          <td>Feasibility</td>
+          <td><%= feasibility.feasible %></td>
+        </tr>
+        <tr>
+          <td>Point of Presence</td>
+          <td><%= feasibility.pop %></td>
+        </tr>
+        <tr>
+          <td>Agency Remark</td>
+          <td><%= feasibility.agencyRemark %></td>
+        </tr>
+        <tr>
+          <td>Feasibility Given By</td>
+          <td><%= feasibility.givenBy %></td>
+        </tr>
+        <% if(feasibility.compDate) { %>
+        <tr>
+          <td>Completion Date</td>
+          <td><%= moment(feasibility.compDate).format('YYYY/MM/DD') %></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+
+    <div>
+      <h4>Estimate Detail</h4>
+      <table>
+        <tr>
+          <th>Particular</th>
+          <th>Measurement</th>
+          <th>Unit Rate</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+
+        <% feasibility.itemList.forEach((list) => { %>
+        <tr>
+          <td><%= list.name %></td>
+          <td><%= list.measurement %></td>
+          <td class="right"><%= list.unitRate.toFixed(2) %></td>
+          <td class="right"><%= list.qty %></td>
+          <td class="right"><%= list.amt.toFixed(2) %></td>
+        </tr>
+        <% }) %>
+
+        <tr>
+          <th colspan="4">Total Estimate</th>
+          <th class="right"><%= feasibility.estimate.toFixed(2) %></th>
+        </tr>
+      </table>
+    </div>
+
+    <h5>This is system generated Mail.</h5>
+  </body>
+</html>

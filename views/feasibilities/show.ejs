@@ -21,6 +21,10 @@
 
             <tbody>
               <tr>
+                <td>Unique ID</td>
+                <td><%= feasibility._id %></td>
+              </tr>
+              <tr>
                 <td>Name</td>
                 <td><%= feasibility.name %></td>
               </tr>
@@ -71,6 +75,10 @@
               <tr>
                 <td>Remark</td>
                 <td><%= feasibility.remark %></td>
+              </tr>
+              <tr>
+                <td>Feasibility Request By</td>
+                <td><%= feasibility.createBy %></td>
               </tr>
             </tbody>
           </table>

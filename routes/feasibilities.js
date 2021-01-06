@@ -7,6 +7,7 @@ const { Item } = require('../models/items');
 const { FeasibilityQueryBuild } = require('../utils/feasibilities/feasibilityQueryBuild');
 
 const { isLoggedIn, isActiveUser, isAdminUser, isAdminOrNodelUser } = require('../middleware/auth');
+const { feasibilityMail } = require('../utils/feasibilities/feasibilityMail');
 
 router.get('/', [isLoggedIn, isActiveUser], async (req, res) => {
   let findObj = {};
@@ -41,6 +42,7 @@ router.get('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, r
 });
 
 router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
+  req.body.createBy = req.user.username;
   await Feasibility.create(req.body, (err, newFeasibility) => {
     if (err) {
       console.log(err);
@@ -62,13 +64,15 @@ router.get('/:id', [isLoggedIn, isActiveUser], async (req, res) => {
         req.flash('error', 'Feasibility not found');
         res.redirect('/feasibilities');
       } else {
-        found.estimate = found.itemList
-          .reduce((comm, item) => {
-            return (comm += item.amt);
-          }, 0)
-          .toFixed(2);
+        if (found.pending) {
+          found.estimate = found.itemList
+            .reduce((comm, item) => {
+              return (comm += item.amt);
+            }, 0)
+            .toFixed(2);
 
-        await found.save();
+          await found.save();
+        }
         res.render('feasibilities/show', { feasibility: found });
       }
     });
@@ -95,16 +99,22 @@ router.put('/:id', [isLoggedIn, isActiveUser], async (req, res) => {
       data.pending = false;
       data.givenBy = req.user.username;
     }
-    await Feasibility.findByIdAndUpdate(req.params.id, data, (err, update) => {
-      if (err || !update) {
-        console.log(err);
-        req.flash('error', `Can not update please try again`);
-        res.redirect('back');
-      } else {
-        req.flash('primary', `Feasibility Updated`);
-        res.redirect('/feasibilities');
+    try {
+      let feasibility = await Feasibility.findOneAndUpdate({ _id: req.params.id }, data);
+      await feasibility.save((err) => {
+        if (err) throw err;
+      });
+
+      if (data.feasible && (data.feasible === 'YES' || data.feasible === 'NO')) {
+        feasibilityMail(req.params.id, req.user.email);
       }
-    });
+      req.flash('primary', `Feasibility Updated`);
+      res.redirect('/feasibilities');
+    } catch (err) {
+      console.log(err.message);
+      req.flash('error', `Can not update Feasibility: ${req.params.id}`);
+      res.redirect(back);
+    }
   } else {
     req.flash('error', `Can not update please contact Admin to Reset`);
     res.redirect('back');

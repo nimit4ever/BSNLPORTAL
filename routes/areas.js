@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { Area } = require('../models/areas');
 
-const { isLoggedIn, isActiveUser, isAdminUser, isSuperAdminUser } = require('../middleware/auth');
+const { isLoggedIn, isActiveUser, isAdminUser } = require('../middleware/auth');
 
 router.get('/', [isLoggedIn, isActiveUser, isAdminUser], async (req, res) => {
   areas = await Area.find({});

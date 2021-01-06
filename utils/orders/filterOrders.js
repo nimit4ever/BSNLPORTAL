@@ -17,7 +17,7 @@ function addTask(fOrder, task) {
   }
 }
 
-module.exports = (orders) => {
+function filterOrders(orders) {
   totalOrders = [];
   for (order of orders) {
     let fOrder = totalOrders.find((foundOrder) => {
@@ -60,4 +60,6 @@ module.exports = (orders) => {
     addTask(fOrder, order.WRG);
   }
   return totalOrders;
-};
+}
+
+module.exports = { filterOrders };

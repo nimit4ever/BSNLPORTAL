@@ -4,13 +4,6 @@
 <form action="/units/<%= unit._id %>?_method=PUT" method="POST">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="name">Unit Name</label>
-      <input type="text" class="form-control" id="name" value="<%= unit.name %>" name="name" required />
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
       <label for="type">Unit Type</label>
       <select class="form-control form-control-option" id="type" name="type" required>
         <option value="<%= unit.type %>"><%= unit.type %></option>
@@ -18,6 +11,13 @@
         <option value="<%= type %>"><%= type %></option>
         <% }) %>
       </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Unit Name</label>
+      <input type="text" class="form-control" id="name" value="<%= unit.name %>" name="name" required />
     </div>
   </div>
 

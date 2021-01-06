@@ -3,8 +3,8 @@ const schedule = require('node-schedule');
 
 const { Order } = require('../../models/orders');
 
-const fetchOrders = require('./fetchOrders');
-const filterOrders = require('./filterOrders');
+const { fetchOrders } = require('./fetchOrders');
+const { filterOrders } = require('./filterOrders');
 
 // Helper Function
 const rule = new schedule.RecurrenceRule();
@@ -13,7 +13,7 @@ rule.minute = 0;
 
 try {
   const j = schedule.scheduleJob(rule, async () => {
-    await fetchOrders('RJT');
+    await fetchAreaOrders('RJT');
   });
 } catch (err) {
   console.log(err.message);

@@ -4,13 +4,6 @@
 <form action="/units/new" method="POST">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="name">Unit Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Unit Name" name="name" required />
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
       <label for="type">Unit Type</label>
       <select class="form-control form-control-option" id="type" name="type" required>
         <option value="">SELECT</option>
@@ -18,6 +11,13 @@
         <option value="<%= type %>"><%= type %></option>
         <% }) %>
       </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">New Unit Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter New Unit Name" name="name" required />
     </div>
   </div>
 

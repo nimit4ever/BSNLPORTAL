@@ -2,7 +2,7 @@ const axios = require('axios');
 const qs = require('qs');
 const htmlTableToJson = require('html-table-to-json');
 
-module.exports = async (area) => {
+async function fetchOrders(area) {
   const totalOrder = [];
   const configGet = {
     method: 'get',
@@ -54,4 +54,6 @@ module.exports = async (area) => {
       console.log(error.message);
     });
   return totalOrder;
-};
+}
+
+module.exports = { fetchOrders };
