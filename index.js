@@ -29,7 +29,7 @@ execFile('C:/Program Files/MongoDB/Server/4.4/bin/mongod.exe', ['--version'], as
     console.log(error.message);
     await InitiateMongoServer(false);
   } else {
-    await InitiateMongoServer(false); // true
+    await InitiateMongoServer(true); // true
   }
 });
 

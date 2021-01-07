@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const InitiateMongoServer = async (local) => {
   let DATABASEURL = '';
   if (local) {
-    DATABASEURL = 'mongodb://localhost:27017/lcreport';
+    DATABASEURL = 'mongodb://localhost:27017/bsnlportal';
   } else {
     DATABASEURL = process.env.DATABASEURL;
   }

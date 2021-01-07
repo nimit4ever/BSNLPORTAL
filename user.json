@@ -1,0 +1,602 @@
+[
+  {
+    "firstname": "AMIT",
+    "lastname": "BHAYANI",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9426165403",
+    "email": "arbhayani@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "AMIT",
+    "lastname": "KATESHIYA",
+    "area": "RJT",
+    "role": "JUBLEE",
+    "username": "9426788400",
+    "email": "amitkateshiya@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "AMIT",
+    "lastname": "SHUKLA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9426961199",
+    "email": "amitsshukla9@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "AMIT",
+    "lastname": "THAKAR",
+    "area": "RJT",
+    "role": "LOHANAGAR",
+    "username": "9427200799",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "ANIL",
+    "lastname": "JOTANI",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427214709",
+    "email": "anjotani@yahoo.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "ARVIND",
+    "lastname": "CHOTALIYA",
+    "area": "RJT",
+    "role": "TRANS-3",
+    "username": "9427497234",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "ARVIND",
+    "lastname": "PARMAR",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9427214505",
+    "email": "amparmar@bsnl.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "BELA",
+    "lastname": "VAIDYA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9409519523",
+    "email": "belavaidya@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "BHIMABHAI",
+    "lastname": "ODEDARA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427213921",
+    "email": "bro1052@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "BHUSHAN",
+    "lastname": "DHANESHA",
+    "area": "RJT",
+    "role": "DHORAJI",
+    "username": "9426497531",
+    "email": "bhushandhanesha@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "BIMAL",
+    "lastname": "PANDIT",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427218451",
+    "email": "bjpandit@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "DHARMENDRA",
+    "lastname": "JOSHI",
+    "area": "RJT",
+    "role": "GONDAL",
+    "username": "9429484284",
+    "email": "amrsde1ofc@bsnl.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "DIPAK",
+    "lastname": "TRIVEDI",
+    "area": "RJT",
+    "role": "NIB",
+    "username": "9427667799",
+    "email": "dwarkadhishtrust@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "HEMENDRA",
+    "lastname": "SONIGRA",
+    "area": "RJT",
+    "role": "JETPUR",
+    "username": "9427112433",
+    "email": "hemumistry@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "JAYDEEP",
+    "lastname": "BAUDDH",
+    "area": "RJT",
+    "role": "TRANS-4",
+    "username": "9427217012",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "JAYESH",
+    "lastname": "GOTI",
+    "area": "RJT",
+    "role": "TRANS-5",
+    "username": "9427230599",
+    "email": "jcg@rediffmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "JIGNESH",
+    "lastname": "JETHAVA",
+    "area": "RJT",
+    "role": "KASTURBA RD",
+    "username": "9428214888",
+    "email": "jigneshjethava@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "KASHYAP",
+    "lastname": "PITHVA",
+    "area": "RJT",
+    "role": "BSS",
+    "username": "9427383633",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "KIRTI",
+    "lastname": "OZA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9429565065",
+    "email": "kirtipandya14@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "KISHOR",
+    "lastname": "RANK",
+    "area": "RJT",
+    "role": "KASTURBA RD",
+    "username": "9427217021",
+    "email": "kishorkumar.rank@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "KULDEEP",
+    "lastname": "GADHAVI",
+    "area": "RJT",
+    "role": "KOTDA SANGANI",
+    "username": "9427721399",
+    "email": "amrjtoeb@bsnl.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "MAGANBHAI",
+    "lastname": "BALDANIA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9426816345",
+    "email": "rjsde2@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "MANOJ",
+    "lastname": "AGHARA",
+    "area": "RJT",
+    "role": "TRANS-4",
+    "username": "9426973488",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "MAYUR",
+    "lastname": "POPTANI",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9429577766",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "MUKESH",
+    "lastname": "VAGHELA",
+    "area": "RJT",
+    "role": "DHORAJI",
+    "username": "9428346111",
+    "email": "mukeshgvaghela@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "MUKKARAM",
+    "lastname": "SADEKI",
+    "area": "RJT",
+    "role": "JUBLEE",
+    "username": "9409523270",
+    "email": "mukram.sadeki@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NANDAN",
+    "lastname": "DHANAK",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9427214641",
+    "email": "njdhanak@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NAVNIT",
+    "lastname": "DUDHREJIA",
+    "area": "RJT",
+    "role": "MORBI",
+    "username": "9427200858",
+    "email": "mly_sde@rediffmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NILESH",
+    "lastname": "DHAMECHA",
+    "area": "RJT",
+    "role": "BSS",
+    "username": "9428829150",
+    "email": "dhamechann9@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NILESH",
+    "lastname": "KHARCHALIA",
+    "area": "RJT",
+    "role": "RAIYA RD",
+    "username": "9426735333",
+    "email": "n_kharchalia@yahoo.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NIMIT",
+    "lastname": "PATEL",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9408611110",
+    "email": "nimit4ever@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NIRAV",
+    "lastname": "MEHTA",
+    "area": "RJT",
+    "role": "KASTURBA RD",
+    "username": "9427216644",
+    "email": "nirav.bsnl@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "NIRAV",
+    "lastname": "VAGHELA",
+    "area": "RJT",
+    "role": "PADDHARI",
+    "username": "9427727474",
+    "email": "niravmvaghela@yahoo.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "PANKAJ",
+    "lastname": "KAKANIYA",
+    "area": "RJT",
+    "role": "MORBI",
+    "username": "9427200883",
+    "email": "kakaniya@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "PARAG",
+    "lastname": "THAKER",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427214460",
+    "email": "parag.m.thaker@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "PRAGNESH",
+    "lastname": "GONDALIYA",
+    "area": "RJT",
+    "role": "TRANS-2",
+    "username": "9427802151",
+    "email": "pragneshgondaliya@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "PRAVIN",
+    "lastname": "BARCHHA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427214490",
+    "email": "barchhapravin@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RAJESH",
+    "lastname": "KARIA",
+    "area": "RJT",
+    "role": "JUBLEE",
+    "username": "9426204560",
+    "email": "rajeshkaria.bsnl@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RAJESH",
+    "lastname": "MEHTA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427214622",
+    "email": "rjmehtabsnl@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RAKESH",
+    "lastname": "VORA",
+    "area": "RJT",
+    "role": "UPLETA",
+    "username": "9426499914",
+    "email": "rakeshvvora@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RASESH",
+    "lastname": "VORA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9429819339",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RASIK",
+    "lastname": "SARVAIYA",
+    "area": "RJT",
+    "role": "BSS",
+    "username": "9429243504",
+    "email": "",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RAXIT",
+    "lastname": "BHATT",
+    "area": "RJT",
+    "role": "JASDAN",
+    "username": "9427787147",
+    "email": "raxitharsh@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "RUCHIKA",
+    "lastname": "SINGH",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9499528111",
+    "email": "ruchika.singh24@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SANDIP",
+    "lastname": "RATHOD",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9426660808",
+    "email": "sandip_rathod@bsnl.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SANDIP",
+    "lastname": "SOLANKI",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9429244440",
+    "email": "sandipsolanki@bsnl.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SANJAY",
+    "lastname": "SANDPA",
+    "area": "RJT",
+    "role": "RAIYA RD",
+    "username": "9484693198",
+    "email": "ssandpa@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SANJAY",
+    "lastname": "SONBANSHI",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9427216633",
+    "email": "sonbanshisanjay@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SANJAY",
+    "lastname": "ZALA",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9427282524",
+    "email": "snjzala.1973@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SAUMYA",
+    "lastname": "VACHHARAJANI",
+    "area": "RJT",
+    "role": "RAIYA RD",
+    "username": "9426375960",
+    "email": "saumyamv@yahoo.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SEEMA",
+    "lastname": "GUPTA",
+    "area": "RJT",
+    "role": "RAIYA RD",
+    "username": "9427214455",
+    "email": "imseema2001@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SHAILESH",
+    "lastname": "SHYARA",
+    "area": "RJT",
+    "role": "JUBLEE",
+    "username": "9408572713",
+    "email": "shyarashailesh@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "SUBHASH",
+    "lastname": "RAJPARA",
+    "area": "RJT",
+    "role": "LCTX",
+    "username": "9429471294",
+    "email": "subhashrajpara@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "TEJAS",
+    "lastname": "PARMAR",
+    "area": "RJT",
+    "role": "TRANS-3",
+    "username": "9426911434",
+    "email": "parmar_tejas@rediffmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "TUSHAR",
+    "lastname": "GAJERA",
+    "area": "RJT",
+    "role": "NONE",
+    "username": "9427217083",
+    "email": "gajeratushar@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "VISHAL",
+    "lastname": "RANK",
+    "area": "RJT",
+    "role": "JETPUR",
+    "username": "9429944000",
+    "email": "vishal.rank2014@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "VISHAL",
+    "lastname": "VIDJA",
+    "area": "RJT",
+    "role": "TRANS-4",
+    "username": "9429280028",
+    "email": "vidja_vishal@yahoo.co.in",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "VISHNU",
+    "lastname": "JOTANGIA",
+    "area": "RJT",
+    "role": "GONDAL",
+    "username": "9409259555",
+    "email": "vishnu98293@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "VISMAY",
+    "lastname": "OZA",
+    "area": "RJT",
+    "role": "NO",
+    "username": "9429577555",
+    "email": "ozavismay@gmail.com",
+    "password": "password",
+    "confirm": "password"
+  },
+  {
+    "firstname": "YOGESH",
+    "lastname": "BUHECHA",
+    "area": "RJT",
+    "role": "LOHANAGAR",
+    "username": "9427564300",
+    "email": "yogeshbuhecha@yahoo.co.uk",
+    "password": "password",
+    "confirm": "password"
+  }
+]
