@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   lastname: { type: String, uppercase: true, required: true, minlength: 3, maxlength: 50 },
   username: { type: Number, required: true, min: 7000000000, max: 9999999999, unique: true },
   email: { type: String, lowercase: true, required: true, minlength: 5, maxlength: 255, unique: true },
-  isActive: { type: Boolean, default: true },
+  isActive: { type: Boolean, default: false },
   created: { type: Date, default: Date.now },
   role: { type: String, uppercase: true, default: 'NONE' },
   area: { type: String, uppercase: true, default: 'NONE' },

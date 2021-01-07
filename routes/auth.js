@@ -15,12 +15,6 @@ router.get('/', (req, res) => {
 
 // Signup Form
 router.get('/signup', async (req, res) => {
-  const users = await JSON.parse(fs.readFileSync('./user.json'));
-  for (user of users) {
-    console.log(user);
-    newUser = new User(user);
-    await User.register(newUser, 'password');
-  }
   res.render('./auth/signup');
 });
 
