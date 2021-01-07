@@ -35,7 +35,7 @@
     "area": "RJT",
     "role": "LOHANAGAR",
     "username": "9427200799",
-    "email": "",
+    "email": "abc1@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -55,7 +55,7 @@
     "area": "RJT",
     "role": "TRANS-3",
     "username": "9427497234",
-    "email": "",
+    "email": "abc2@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -145,7 +145,7 @@
     "area": "RJT",
     "role": "TRANS-4",
     "username": "9427217012",
-    "email": "",
+    "email": "abc3@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -175,7 +175,7 @@
     "area": "RJT",
     "role": "BSS",
     "username": "9427383633",
-    "email": "",
+    "email": "abc4@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -225,7 +225,7 @@
     "area": "RJT",
     "role": "TRANS-4",
     "username": "9426973488",
-    "email": "",
+    "email": "abc5@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -235,7 +235,7 @@
     "area": "RJT",
     "role": "NONE",
     "username": "9429577766",
-    "email": "",
+    "email": "abc6@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -296,16 +296,6 @@
     "role": "RAIYA RD",
     "username": "9426735333",
     "email": "n_kharchalia@yahoo.com",
-    "password": "password",
-    "confirm": "password"
-  },
-  {
-    "firstname": "NIMIT",
-    "lastname": "PATEL",
-    "area": "RJT",
-    "role": "NO",
-    "username": "9408611110",
-    "email": "nimit4ever@gmail.com",
     "password": "password",
     "confirm": "password"
   },
@@ -405,7 +395,7 @@
     "area": "RJT",
     "role": "NONE",
     "username": "9429819339",
-    "email": "",
+    "email": "abc7@abc.com",
     "password": "password",
     "confirm": "password"
   },
@@ -415,7 +405,7 @@
     "area": "RJT",
     "role": "BSS",
     "username": "9429243504",
-    "email": "",
+    "email": "abc8@abc.com",
     "password": "password",
     "confirm": "password"
   },

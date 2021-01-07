@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const { User } = require('../models/users');
 const { signupFormValidate } = require('../middleware/auth');
+const fs = require('fs');
 
 // Root
 router.get('/', (req, res) => {
@@ -13,7 +14,13 @@ router.get('/', (req, res) => {
 });
 
 // Signup Form
-router.get('/signup', (req, res) => {
+router.get('/signup', async (req, res) => {
+  const users = await JSON.parse(fs.readFileSync('./user.json'));
+  for (user of users) {
+    console.log(user);
+    newUser = new User(user);
+    await User.register(newUser, 'password');
+  }
   res.render('./auth/signup');
 });
 
