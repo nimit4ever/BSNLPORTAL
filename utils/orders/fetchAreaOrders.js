@@ -79,6 +79,9 @@ async function fetchAreaOrders(area) {
         });
       } else {
         updateTask(foundOrder, order);
+        if (foundOrder.isActive === false) {
+          foundOrder.isActive = true;
+        }
         await foundOrder.save((err) => {
           if (err) {
             console.log(err.message);
