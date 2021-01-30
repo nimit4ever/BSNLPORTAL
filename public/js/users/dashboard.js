@@ -20,6 +20,13 @@ colors = [
   '#e74a3b',
   '#4e73df',
   '#f6c23e',
+  '#858796',
+  '#aa66cc',
+  '#3F729B',
+  '#afb42b',
+  '#6d4c41',
+  '#455a64',
+  '#e91e63',
 ];
 
 // Legend Callback Function
