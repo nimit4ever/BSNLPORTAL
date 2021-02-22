@@ -8,7 +8,7 @@ const { filterOrders } = require('./filterOrders');
 
 // Helper Function
 const rule = new schedule.RecurrenceRule();
-rule.hour = [new schedule.Range(10, 18)];
+rule.hour = [new schedule.Range(8, 20, 2)];
 rule.minute = 0;
 
 try {

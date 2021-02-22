@@ -164,4 +164,10 @@ router.delete('/:id', [isLoggedIn, isActiveUser, isAdminUser], async (req, res) 
   });
 });
 
+router.get('/bulk', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
+  res.render('./feasibilities/bulk', { services });
+});
+
+router.post('/bulk', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {});
+
 module.exports = router;
