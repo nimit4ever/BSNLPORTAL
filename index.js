@@ -24,7 +24,7 @@ const itemsRoute = require('./routes/items');
 
 // Connect to the Database
 const InitiateMongoServer = require('./utils/connectDB');
-execFile('C:/Program Files/MongoDB/Server/4.4/bin/mongod.exe', ['--version'], async (error, stdout, stderr) => {
+execFile('C:/Program Files/MongoDB/Server/5.0/bin/mongod.exe', ['--version'], async (error, stdout, stderr) => {
   if (error) {
     console.log(error.message);
     await InitiateMongoServer(false);
