@@ -138,7 +138,7 @@ $.get('/orders/api?isActive=ALL', (orders) => {
 
   if (role === 'NO' || role === 'ADMIN') {
     // Agency wise Order Chart
-    chartCreate(orders, 'isActive', true, 'agency', 'agency_orders', 'agency_ordersLegend', 'orders', 'agency=');
+    // chartCreate(orders, 'isActive', true, 'agency', 'agency_orders', 'agency_ordersLegend', 'orders', 'agency=');
   }
   // Order Type wise Order Chart
   chartCreate(orders, 'isActive', true, 'orderType', 'orderType_orders', 'orderType_ordersLegend', 'orders', 'orderType=');
@@ -146,14 +146,14 @@ $.get('/orders/api?isActive=ALL', (orders) => {
   chartCreate(orders, 'isActive', true, 'reason', 'reason_orders', 'reason_ordersLegend', 'orders', 'reason=');
 });
 
-$.get('/feasibilities/api?pending=ALL', (feasibilities) => {
-  $('#myFeasibilityPending').text(
-    feasibilities.reduce((count, feasibility) => {
-      return feasibility.pending ? (count += 1) : count;
-    }, 0)
-  );
-  if (role === 'NO' || role === 'ADMIN') {
-    // Agency wise Feasibility Chart
-    chartCreate(feasibilities, 'pending', true, 'agency', 'agency_feasibilities', 'agency_feasibilitiesLegend', 'feasibilities', 'agency=');
-  }
-});
+// $.get('/feasibilities/api?pending=ALL', (feasibilities) => {
+//   $('#myFeasibilityPending').text(
+//     feasibilities.reduce((count, feasibility) => {
+//       return feasibility.pending ? (count += 1) : count;
+//     }, 0)
+//   );
+//   if (role === 'NO' || role === 'ADMIN') {
+//     // Agency wise Feasibility Chart
+//     chartCreate(feasibilities, 'pending', true, 'agency', 'agency_feasibilities', 'agency_feasibilitiesLegend', 'feasibilities', 'agency=');
+//   }
+// });

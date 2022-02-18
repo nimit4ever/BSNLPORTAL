@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const pdf = require('html-pdf');
 
 const { Order } = require('../models/orders');
 
 const { fetchAreaOrders } = require('../utils/orders/fetchAreaOrders');
+const { orderFetch } = require('../utils/orders/orderFetch');
 const { OrderQueryBuild } = require('../utils/orders/orderQueryBuild');
 const { isLoggedIn, isActiveUser, isAdminOrNodelUser } = require('../middleware/auth');
 
@@ -44,6 +47,29 @@ router.post('/new', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, 
     console.log(err.message);
     req.flash('error', 'Can not Sync database');
     res.redirect('/orders');
+  }
+});
+
+router.get('/:id', [isLoggedIn, isActiveUser, isAdminOrNodelUser], async (req, res) => {
+  try {
+    const orderHtml = await orderFetch(req.params.id);
+    if (!orderHtml) {
+      throw 'Can not connect to the server, please try later';
+    } else {
+      // const html = fs.readFileSync('./my.html', 'utf8');
+      const options = { format: 'A4' };
+      await pdf.create(orderHtml, options).toStream(function (err, stream) {
+        if (err) {
+          throw 'PDF file can not be created';
+        } else {
+          res.attachment(`${req.params.id}.pdf`);
+          stream.pipe(res);
+        }
+      });
+    }
+  } catch (err) {
+    req.flash('error', err);
+    res.redirect('back');
   }
 });
 

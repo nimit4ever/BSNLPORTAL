@@ -1,7 +1,16 @@
 <%- include ('../partial/header') %>
 
-<h1 class="h3 mb-4 text-gray-800">Order Edit Form</h1>
 <form action="/orders/<%= order.orderId %>/edit?_method=PUT" method="POST">
+  <div class="form-row">
+    <div class="form-group col">
+      <a href="/orders/<%= order.orderId %>" class="btn btn-danger btn-icon-split mr-2">
+        <span class="icon text-white-50"><i class="fas fa-download"></i></span><span class="text">Download</span>
+      </a>
+      <button type="submit" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Save Order</span>
+      </button>
+    </div>
+  </div>
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="name">Customer Name</label>
@@ -104,16 +113,19 @@
       <input type="text" class="form-control" id="remark" value="<%= order.remark %>" name="remark" />
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col">
-      <button type="submit" class="btn btn-primary btn-icon-split">
-        <span class="icon text-white-50"><i class="fas fa-flag"></i></span><span class="text">Save Order</span>
-      </button>
-    </div>
-  </div>
 </form>
 
-<%- include ('../partial/footer') %>
+<% if(currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
+<hr />
+
+<!-- <a href="/orders/<%= order.orderId %>" class="btn btn-success btn-icon-split mb-2">
+  <span class="icon text-white-50">
+    <i class="fas fa-download"></i>
+  </span>
+  <span class="text">Download</span>
+</a> -->
+
+<% } %> <%- include ('../partial/footer') %>
 
 <!-- Page level custom scripts -->
 <script src="/js/orders/edit.js"></script>

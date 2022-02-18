@@ -10,7 +10,7 @@
 <!-- Content Row -->
 <div class="row">
   <!-- My Pending Feasibility -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <!-- <div class="col-xl-3 col-md-6 mb-4">
     <a href="/feasibilities" class="mya">
       <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -26,7 +26,7 @@
         </div>
       </div>
     </a>
-  </div>
+  </div> -->
 
   <!-- My Pending Order -->
   <div class="col-xl-3 col-md-6 mb-4">
@@ -93,13 +93,11 @@
 <div class="row">
   <% if (currentUser.role === 'NO' || currentUser.role === 'ADMIN') { %>
   <!-- Pie Chart Pending Feasibility Agency Wise -->
-  <div class="col-lg-6">
+  <!-- <div class="col-lg-6">
     <div class="card shadow mb-4">
-      <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Pending Feasibility Agency Wise</h6>
       </div>
-      <!-- Card Body -->
       <div class="card-body">
         <div class="chart-pie pt-4 pb-2">
           <canvas id="agency_feasibilities"></canvas>
@@ -107,16 +105,15 @@
         <div class="mt-4 text-center small legend" id="agency_feasibilitiesLegend"></div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Pie Chart Pending Order Agency Wise -->
-  <div class="col-lg-6">
+  <!-- <div class="col-lg-6">
     <div class="card shadow mb-4">
-      <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Pending Order Agency Wise</h6>
       </div>
-      <!-- Card Body -->
+
       <div class="card-body">
         <div class="chart-pie pt-4 pb-2">
           <canvas id="agency_orders"></canvas>
@@ -124,7 +121,7 @@
         <div class="mt-4 text-center small legend" id="agency_ordersLegend"></div>
       </div>
     </div>
-  </div>
+  </div> -->
   <% } %>
 
   <!-- Pie Chart Pending Order Type wise -->
