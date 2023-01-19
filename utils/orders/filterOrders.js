@@ -29,10 +29,10 @@ function filterOrders(orders) {
       fOrder.orderId = parseInt(order.SERO_ID);
       if (order.ORDER_SUB_TYPE.substring(0, 5) === 'Shift') {
         fOrder.orderType = `Shift ${order.ORDER_TYPE}`;
-      } else if (order.ORDER_TYPE === 'Create') {
-        fOrder.orderType = 'New';
-      } else if (order.ORDER_TYPE === 'Modify' && order.CURRENT_BANDWIDTH === order.PREV_BANDWIDTH) {
-        fOrder.orderType = 'Conversion';
+      } else if (order.ORDER_TYPE === 'CREATE') {
+        fOrder.orderType = 'NEW';
+      } else if (order.ORDER_TYPE === 'MODIFY' && order.CURRENT_BANDWIDTH === order.PREV_BANDWIDTH) {
+        fOrder.orderType = 'CONVERSION';
       } else {
         fOrder.orderType = order.ORDER_TYPE;
       }
