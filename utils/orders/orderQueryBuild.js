@@ -7,9 +7,10 @@ class OrderQueryBuild {
     if (user.role === 'NIB' || user.role === 'MLLN' || user.role === 'LCTX' || user.role === 'LDTX') {
       if (query && query.isActive && query.isActive == 0) {
         this[user.role] = { $exists: true };
-      } else {
-        this[user.role] = false;
       }
+      // else {
+      //   this[user.role] = false;
+      // }
     } else if (user.role === 'NO' || user.role === 'ADMIN') {
     } else {
       this.agency = user.role;

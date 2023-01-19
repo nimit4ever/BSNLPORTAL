@@ -9,37 +9,18 @@
 <% if(currentUser && currentUser.role && currentUser.area) { %>
 <!-- Content Row -->
 <div class="row">
-  <!-- My Pending Feasibility -->
-  <!-- <div class="col-xl-3 col-md-6 mb-4">
-    <a href="/feasibilities" class="mya">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Feasibility Pending</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800" id="myFeasibilityPending"></div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-check fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a>
-  </div> -->
-
-  <!-- My Pending Order -->
+  <!-- New Order -->
   <div class="col-xl-3 col-md-6 mb-4">
-    <a href="/orders" class="mya">
-      <div class="card border-left-danger shadow h-100 py-2">
+    <a href="/orders?orderType=NEW" class="mya">
+      <div class="card border-left-success shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Order Pending</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800" id="myOrderPending"></div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">NEW</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="newOrder"></div>
             </div>
             <div class="col-auto">
-              <i class="fab fa-atlassian fa-2x text-gray-300"></i>
+              <i class="fas fa-plus fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -47,16 +28,34 @@
     </a>
   </div>
 
-  <% if (currentUser.role === 'ADMIN' || currentUser.role === 'NO') { %>
-  <!-- Agency Pending Order -->
+  <!-- Modify Order -->
   <div class="col-xl-3 col-md-6 mb-4">
-    <a href="/orders?agency=NOT ASSIGN&isActive=ALL" class="mya">
+    <a href="/orders?orderType=MODIFY" class="mya">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">MODIFY</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="modifyOrder"></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-arrow-up fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Conversion Order -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <a href="/orders?orderType=CONVERSION" class="mya">
       <div class="card border-left-info shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Order Agency not Assign</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800" id="agencyPending"></div>
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">CONVERSION</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="conversionOrder"></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -67,25 +66,99 @@
     </a>
   </div>
 
-  <!-- Complete Pending Order -->
+  <!-- Delete Order -->
   <div class="col-xl-3 col-md-6 mb-4">
-    <a href="/orders?reason=INCOMPLETE&isActive=0" class="mya">
-      <div class="card border-left-warning shadow h-100 py-2">
+    <a href="/orders?orderType=DELETE" class="mya">
+      <div class="card border-left-danger shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Order Complete Pending</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800" id="compPending"></div>
+              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">DELETE</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="deleteOrder"></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-bolt fa-2x text-gray-300"></i>
+              <i class="fas fa-trash-alt fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
       </div>
     </a>
   </div>
-  <% } %>
+</div>
+
+<div class="row">
+  <!-- Shift Create Order -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <a href="/orders?orderType=SHIFT CREATE" class="mya">
+      <div class="card border-left-secondary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">SHIFT CREATE</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="shiftCreate"></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-walking fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <a href="/orders?orderType=SHIFT DELETE" class="mya">
+      <div class="card border-left-light shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-light text-uppercase mb-1">SHIFT DELETE</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="shiftDelete"></div>
+            </div>
+            <div class="col-auto">
+              <i class="fab fa-atlassian fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <a href="/orders" class="mya">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">TOTAL PENDING</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalOrder"></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-folder-open fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <a href="/orders?isActive=0" class="mya">
+      <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">ALL COMPLETED</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="allCompleted"></div>
+            </div>
+            <div class="col-auto">
+              <i class="far fa-thumbs-up fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 
 <!-- Content Row -->
@@ -125,13 +198,11 @@
   <% } %>
 
   <!-- Pie Chart Pending Order Type wise -->
-  <div class="col-lg-6">
+  <!-- <div class="col-lg-6">
     <div class="card shadow mb-4">
-      <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Pending Order Type Wise</h6>
       </div>
-      <!-- Card Body -->
       <div class="card-body">
         <div class="chart-pie pt-4 pb-2">
           <canvas id="orderType_orders"></canvas>
@@ -139,16 +210,14 @@
         <div class="mt-4 text-center small legend" id="orderType_ordersLegend"></div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Pie Chart Pending Order Reason Wise -->
-  <div class="col-lg-6">
+  <!-- <div class="col-lg-6">
     <div class="card shadow mb-4">
-      <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Pending Order Reason Wise</h6>
       </div>
-      <!-- Card Body -->
       <div class="card-body">
         <div class="chart-pie pt-4 pb-2">
           <canvas id="reason_orders"></canvas>
@@ -156,7 +225,7 @@
         <div class="mt-4 text-center small legend" id="reason_ordersLegend"></div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- /.container-fluid -->

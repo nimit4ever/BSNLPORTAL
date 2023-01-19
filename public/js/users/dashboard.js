@@ -109,27 +109,91 @@ $.get('/orders/api?isActive=ALL', (orders) => {
   // Set dashboard counts Start
 
   if (!(role === 'NO' || role === 'ADMIN')) {
-    $('#myOrderPending').text(
+    $('#newOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'NEW' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#modifyOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'MODIFY' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#conversionOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'CONVERSION'
+          ? (count += 1)
+          : count;
+      }, 0)
+    );
+    $('#deleteOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'DELETE' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#shiftCreate').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'SHIFT CREATE'
+          ? (count += 1)
+          : count;
+      }, 0)
+    );
+    $('#shiftDelete').text(
+      orders.reduce((count, order) => {
+        return order.isActive && (order[role] === false || order.agency === role) && order.orderType === 'SHIFT DELETE'
+          ? (count += 1)
+          : count;
+      }, 0)
+    );
+    $('#totalOrder').text(
       orders.reduce((count, order) => {
         return order.isActive && (order[role] === false || order.agency === role) ? (count += 1) : count;
       }, 0)
     );
+    $('#allCompleted').text(
+      orders.reduce((count, order) => {
+        return order.isActive === false && (order[role] === true || order.agency === role) ? (count += 1) : count;
+      }, 0)
+    );
   } else {
-    $('#myOrderPending').text(
+    $('#newOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'NEW' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#modifyOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'MODIFY' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#conversionOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'CONVERSION' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#deleteOrder').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'DELETE' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#shiftCreate').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'SHIFT CREATE' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#shiftDelete').text(
+      orders.reduce((count, order) => {
+        return order.isActive && order.orderType === 'SHIFT DELETE' ? (count += 1) : count;
+      }, 0)
+    );
+    $('#totalOrder').text(
       orders.reduce((count, order) => {
         return order.isActive ? (count += 1) : count;
       }, 0)
     );
-
-    $('#agencyPending').text(
+    $('#allCompleted').text(
       orders.reduce((count, order) => {
-        return order.agency === 'NOT ASSIGN' ? (count += 1) : count;
-      }, 0)
-    );
-
-    $('#compPending').text(
-      orders.reduce((count, order) => {
-        return order.isActive === false && !(order.reason === 'COMMISSIONED' || order.reason === 'CANCELLED') ? (count += 1) : count;
+        return order.isActive === false ? (count += 1) : count;
       }, 0)
     );
   }
@@ -141,9 +205,9 @@ $.get('/orders/api?isActive=ALL', (orders) => {
     // chartCreate(orders, 'isActive', true, 'agency', 'agency_orders', 'agency_ordersLegend', 'orders', 'agency=');
   }
   // Order Type wise Order Chart
-  chartCreate(orders, 'isActive', true, 'orderType', 'orderType_orders', 'orderType_ordersLegend', 'orders', 'orderType=');
+  // chartCreate(orders, 'isActive', true, 'orderType', 'orderType_orders', 'orderType_ordersLegend', 'orders', 'orderType=');
   // Reason wise Order Chart
-  chartCreate(orders, 'isActive', true, 'reason', 'reason_orders', 'reason_ordersLegend', 'orders', 'reason=');
+  // chartCreate(orders, 'isActive', true, 'reason', 'reason_orders', 'reason_ordersLegend', 'orders', 'reason=');
 });
 
 // $.get('/feasibilities/api?pending=ALL', (feasibilities) => {

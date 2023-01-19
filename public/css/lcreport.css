@@ -8797,7 +8797,7 @@ a.text-danger:hover {
   color: #be2617 !important;
 }
 .text-light {
-  color: #f8f9fc !important;
+  color: #e83e8c !important;
 }
 a.text-light:focus,
 a.text-light:hover {
@@ -9175,7 +9175,7 @@ a:focus {
   border-bottom: 0.25rem solid #e74a3b !important;
 }
 .border-left-light {
-  border-left: 0.25rem solid #f8f9fc !important;
+  border-left: 0.25rem solid #e83e8c !important;
 }
 .border-bottom-light {
   border-bottom: 0.25rem solid #f8f9fc !important;

@@ -29,6 +29,10 @@ function filterOrders(orders) {
       fOrder.orderId = parseInt(order.SERO_ID);
       if (order.ORDER_SUB_TYPE.substring(0, 5) === 'Shift') {
         fOrder.orderType = `Shift ${order.ORDER_TYPE}`;
+      } else if (order.ORDER_TYPE === 'Create') {
+        fOrder.orderType = 'New';
+      } else if (order.ORDER_TYPE === 'Modify' && order.CURRENT_BANDWIDTH === order.PREV_BANDWIDTH) {
+        fOrder.orderType = 'Conversion';
       } else {
         fOrder.orderType = order.ORDER_TYPE;
       }
